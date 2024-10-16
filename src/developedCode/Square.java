@@ -1,3 +1,4 @@
+package developedCode;
 
 public class Square {
 	private int available;
