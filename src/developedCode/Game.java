@@ -7,4 +7,6 @@ public class Game {
 	private int score;
 	private int highscore;
 	private ArrayList<Queen> queens;
+	
+	
 }

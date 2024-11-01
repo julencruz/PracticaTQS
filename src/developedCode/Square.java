@@ -1,7 +1,11 @@
 package developedCode;
 
-public class Square {
+public abstract class Square {
 	private int available;
 	private String color;
-	private SquareType type;
+	
+	public abstract void disable();
+	public abstract boolean isDisabled();
+	public abstract void setColor();
+	public abstract String getColor();
 }
