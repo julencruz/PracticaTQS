@@ -1,8 +1,20 @@
 package developedCode;
 
 public abstract class Square {
-	private int available;
-	private String color;
+	protected int available;
+	protected String color;
+	
+	public Square()
+	{
+		available = 0;
+		color = "";
+	}
+	
+	public Square(String initColor)
+	{
+		available = 0;
+		color = initColor;
+	}
 	
 	public abstract void disable();
 	public abstract boolean isDisabled();

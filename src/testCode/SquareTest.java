@@ -28,7 +28,10 @@ class SquareTest {
 		assertTrue(s.isDisabled());
 		assertTrue(s.getColor() == Colors.BLUE);
 		
+		Square s2 = new SquareDefault(Colors.RED);
 		
+		assertFalse(s2.isDisabled());
+		assertTrue(s2.getColor() == Colors.RED);
 		
 	}
 

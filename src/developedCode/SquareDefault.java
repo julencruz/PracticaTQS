@@ -2,6 +2,17 @@ package developedCode;
 
 public class SquareDefault extends Square{
 
+	public SquareDefault()
+	{
+		super();
+	}
+	
+	public SquareDefault(String initColor)
+	{
+		super(initColor);
+	}
+	
+	
 	@Override
 	public void disable() {		
 	}
