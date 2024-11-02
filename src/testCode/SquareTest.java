@@ -14,7 +14,7 @@ class SquareTest {
 	
 	//Basic tests, are to test the constructors, getters and setters
 	@Test
-	void testBasic() {
+	void testBasicSquare() {
 		
 		//default square testing
 		Square s = new SquareDefault();
