@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import developedCode.Colors;
-import developedCode.Section;
+
 
 class SectionTest {
 
@@ -31,6 +31,7 @@ class SectionTest {
 		
 		se1.enable();
 		assertFalse(se1.isDisabled());
+	}
 
 	
 	@Test
