@@ -12,7 +12,7 @@ public class SquareDefault extends Square{
 	}
 
 	@Override
-	public void setColor() {	
+	public void setColor(String color) {	
 	}
 
 	@Override

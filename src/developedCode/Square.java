@@ -6,6 +6,6 @@ public abstract class Square {
 	
 	public abstract void disable();
 	public abstract boolean isDisabled();
-	public abstract void setColor();
+	public abstract void setColor(String color);
 	public abstract String getColor();
 }
