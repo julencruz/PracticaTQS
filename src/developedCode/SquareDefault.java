@@ -15,20 +15,27 @@ public class SquareDefault extends Square{
 	
 	@Override
 	public void disable() {		
+		available++;
 	}
 
 	@Override
 	public boolean isDisabled() {
+		if(available > 0)
+		{
+			return true;
+		}
+		
 		return false;
 	}
 
 	@Override
-	public void setColor(String color) {	
+	public void setColor(String setColor) {	
+		color = setColor;
 	}
 
 	@Override
 	public String getColor() {
-		return null;
+		return color;
 	}
 
 }
