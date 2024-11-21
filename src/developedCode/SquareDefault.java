@@ -38,4 +38,10 @@ public class SquareDefault extends Square{
 		return color;
 	}
 
+	@Override
+	public void enable() {
+		available--;
+		
+	}
+
 }

@@ -29,8 +29,6 @@ public abstract class GenerationStrategy {
 	    }
 
 	    for (int column : availableCols) {
-	        matrix[row][column].available = 1000;
-
 	        markAffectedPositions(matrix, row, column);
 
 	        if (placeQueens(matrix, row + 1)) {
@@ -45,12 +43,67 @@ public abstract class GenerationStrategy {
 	}
 	
 	private void unmarkAffectedPositions(Square[][] matrix, int row, int col) {
-		
+		if (row >= 0 && row < size && col >= 0 && col < size)
+		{
+			for (int i = 0; i < size; i++) {
+				if (matrix[row][i].getAvailable() != 1000) {
+		            matrix[row][i].enable();
+		        }
+		    }
+
+		    for (int i = 0; i < size; i++) {
+		        if (matrix[i][col].getAvailable() != 1000) {
+		            matrix[i][col].enable();
+		        }
+		    }
+		    if (row - 1 >= 0 && col - 1 >= 0) {
+		        matrix[row - 1][col - 1].enable(); 
+		    }
+		    if (row - 1 >= 0 && col + 1 < size) {
+		        matrix[row - 1][col + 1].enable(); 
+		    }
+		    if (row + 1 < size && col - 1 >= 0) {
+		        matrix[row + 1][col - 1].enable(); 
+		    }
+		    if (row + 1 < size && col + 1 < size) {
+		        matrix[row + 1][col + 1].enable(); 
+		    }
+		    
+		    matrix[row][col].setAvailable(0);
+		} 
 	}
 
 	private void markAffectedPositions(Square[][] matrix, int row, int col) {
+		if (row >= 0 && row < size && col >= 0 && col < size)
+		{
+			matrix[row][col].setAvailable(1000);
+			for (int i = 0; i < size; i++) {
+				if (matrix[row][i].getAvailable() != 1000) {
+		            matrix[row][i].disable();
+		        }
+		    }
+
+		    for (int i = 0; i < size; i++) {
+		        if (matrix[i][col].getAvailable() != 1000) {
+		            matrix[i][col].disable();
+		        }
+		    }
+		    if (row - 1 >= 0 && col - 1 >= 0) {
+		        matrix[row - 1][col - 1].disable(); 
+		    }
+		    if (row - 1 >= 0 && col + 1 < size) {
+		        matrix[row - 1][col + 1].disable(); 
+		    }
+		    if (row + 1 < size && col - 1 >= 0) {
+		        matrix[row + 1][col - 1].disable(); 
+		    }
+		    if (row + 1 < size && col + 1 < size) {
+		        matrix[row + 1][col + 1].disable(); 
+		    }
+		} 
 		
-	}
+	}	
+	
 
 	protected Square[][] generateQueens(Square[][] blankMatrix){
 		
