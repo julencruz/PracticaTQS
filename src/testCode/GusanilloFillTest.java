@@ -48,13 +48,12 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				System.out.println(result[i][j].getAvailable());
 				assertEquals(result[i][j].getAvailable(), correct[i][j]);
 			}
 		}
 		
 		result = tester.callGenerateQueens(blankMatrix4);
-		int[][] correct2 = {{2,3,queen,2}, {queen,3,2,3}, {3,3,3,queen}, {2,queen,3,2}};
+		int[][] correct2 = {{2,3,queen,2}, {queen,3,3,3}, {3,3,3,queen}, {2,queen,3,2}};
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)

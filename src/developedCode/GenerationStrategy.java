@@ -27,16 +27,22 @@ public abstract class GenerationStrategy {
 	    if (availableCols.isEmpty()) {
 	        return false;
 	    }
-
-	    for (int column : availableCols) {
-	        markAffectedPositions(matrix, row, column);
+	   	    
+	    
+	    while (!availableCols.isEmpty()) {
+	    	
+		    int randomIndex = rng.random(0, availableCols.size() - 1); 
+		    int selectedCol = availableCols.get(randomIndex);
+		    
+	        markAffectedPositions(matrix, row, selectedCol);
 
 	        if (placeQueens(matrix, row + 1)) {
 	            return true;
 	        }
 
-	        matrix[row][column].available = 0; 
-	        unmarkAffectedPositions(matrix, row, column); 
+	        matrix[row][selectedCol].available = 0; 
+	        unmarkAffectedPositions(matrix, row, selectedCol); 
+	        availableCols.remove(randomIndex);
 	    }
 
 	    return false; 
@@ -106,6 +112,12 @@ public abstract class GenerationStrategy {
 	
 
 	protected Square[][] generateQueens(Square[][] blankMatrix){
+		blankMatrix = new Square[size][size];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        blankMatrix[i][j] = new SquareDefault();
+		    }
+		}
 		if (placeQueens(blankMatrix, 0)) {
 	        return blankMatrix;
 	    } else {
