@@ -29,12 +29,11 @@ class GusanilloFillTest {
 		}
 	}
 
-//	@Test
+	@Test
 	void testGenerateQueens() {
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
 		Square[][] result = tester.callGenerateQueens(blankMatrix4);
-		int[][] correct = {{unavailable,queen,unavailable,unavailable}, {unavailable,unavailable,unavailable,queen}, 
-				{queen,unavailable,unavailable,unavailable}, {unavailable,unavailable,queen,unavailable}};
+		int[][] correct = {{2,queen,3,2}, {3,2,3,queen}, {queen,3,3,3}, {2,3,queen,2}};
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -53,8 +52,7 @@ class GusanilloFillTest {
 		}
 		
 		result = tester.callGenerateQueens(blankMatrix4);
-		int[][] correct2 = {{unavailable,unavailable,queen,unavailable}, {queen,unavailable,unavailable,unavailable}, 
-				{unavailable,unavailable,unavailable,queen}, {unavailable,queen,unavailable,unavailable}};
+		int[][] correct2 = {{2,3,queen,2}, {queen,3,2,3}, {3,3,3,queen}, {2,queen,3,2}};
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -77,14 +75,13 @@ class GusanilloFillTest {
 		tester.callMarkAffectedPositions(matrix, -1, -1);
 		assertEquals(matrix, copy);
 		
-		int[][] correct = {{queen,unavailable,unavailable,unavailable}, {unavailable,unavailable,available,available}, 
-				{unavailable,available,available,available}, {unavailable,available,available,available}};
+		int[][] correct = {{queen,1,1,1}, {1,1,0,0}, {1,0,0,0}, {1,0,0,0}};
 		tester.callMarkAffectedPositions(matrix, 0, 0);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				assertEquals(matrix[i][j].getAvailable(), correct[i][j]);
+				assertEquals(correct[i][j], matrix[i][j].getAvailable());
 			}
 		}
 		
@@ -94,7 +91,7 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				assertEquals(matrix[i][j].getAvailable(), correct2[i][j]);
+				assertEquals(correct2[i][j], matrix[i][j].getAvailable());
 			}
 		}
 		
@@ -104,7 +101,7 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)	
 			{
-				assertEquals(matrix[i][j].getAvailable(), correct3[i][j]);
+				assertEquals(correct3[i][j], matrix[i][j].getAvailable());
 			}
 		}	
 	}
@@ -128,18 +125,17 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)	
 			{
-				assertEquals(matrix[i][j].getAvailable(), correct[i][j]);
+				assertEquals(correct[i][j], matrix[i][j].getAvailable());
 			}
 		}
 		
-		int[][] correct2 = {{queen,unavailable,unavailable,unavailable}, {unavailable,unavailable,available,available}, 
-				{unavailable,available,available,available}, {unavailable,available,available,available}};
+		int[][] correct2 = {{queen,1,1,1}, {1,1,0,0}, {1,0,0,0}, {1,0,0,0}};
 		tester.callUnmarkAffectedPositions(matrix, 1, 3);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				assertEquals(matrix[i][j].getAvailable(), correct2[i][j]);
+				assertEquals(correct2[i][j], matrix[i][j].getAvailable());
 			}
 		}
 		
@@ -148,7 +144,7 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				assertEquals(matrix[i][j].getAvailable(), available);
+				assertEquals(available, matrix[i][j].getAvailable());
 			}
 		}
 	}

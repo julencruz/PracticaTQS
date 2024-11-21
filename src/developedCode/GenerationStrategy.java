@@ -106,6 +106,11 @@ public abstract class GenerationStrategy {
 	
 
 	protected Square[][] generateQueens(Square[][] blankMatrix){
+		if (placeQueens(blankMatrix, 0)) {
+	        return blankMatrix;
+	    } else {
+	        return null;
+	    }
 		
 	}
 	protected Square[][] assignColorToQueens(Square[][] queenMatrix){
