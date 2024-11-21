@@ -20,4 +20,8 @@ public abstract class Square {
 	public abstract boolean isDisabled();
 	public abstract void setColor(String color);
 	public abstract String getColor();
+	
+	public int getAvailable() {
+		return available;
+	}
 }
