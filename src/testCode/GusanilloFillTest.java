@@ -33,11 +33,12 @@ class GusanilloFillTest {
 	void testGenerateQueens() {
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
 		Square[][] result = tester.callGenerateQueens(blankMatrix4);
-		int[][] correct = {{2,queen,3,2}, {3,2,3,queen}, {queen,3,3,3}, {2,3,queen,2}};
+		int[][] correct = {{2,queen,3,2}, {3,3,3,queen}, {queen,3,3,3}, {2,3,queen,2}};
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
+				
 				assertEquals(result[i][j].getAvailable(), correct[i][j]);
 			}
 		}
@@ -47,6 +48,7 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
+				System.out.println(result[i][j].getAvailable());
 				assertEquals(result[i][j].getAvailable(), correct[i][j]);
 			}
 		}
