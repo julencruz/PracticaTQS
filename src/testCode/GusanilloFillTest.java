@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import developedCode.Colors;
 import developedCode.GusanilloFill;
 import developedCode.Square;
 import developedCode.SquareDefault;
@@ -153,7 +154,16 @@ class GusanilloFillTest {
 	
 //	@Test
 	void testAssignColorToQueens() {
-		fail("Not yet implemented");
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0}}));
+		tester.callGenerateQueens(blankMatrix4);
+		Square[][] correct = blankMatrix4;
+		correct[0][1].setColor(Colors.P_RED);
+		correct[1][0].setColor(Colors.P_GREEN);
+		correct[2][3].setColor(Colors.P_BLUE);
+		correct[3][1].setColor(Colors.P_YELLOW);
+		tester.callAssignColorToQueens(blankMatrix4);
+		assertEquals(correct, blankMatrix4);
+		
 	}
 	
 //	@Test
