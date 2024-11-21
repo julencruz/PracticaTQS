@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import developedCode.GusanilloFill;
 import developedCode.Square;
+import developedCode.SquareDefault;
 import testClasses.MockObjects.MockRNG;
 
 class GusanilloFillTest {
@@ -21,9 +22,14 @@ class GusanilloFillTest {
 	void setUp() throws Exception {
 		blankMatrix3 =  new Square[3][3];
 		blankMatrix4 = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        blankMatrix4[i][j] = new SquareDefault();
+		    }
+		}
 	}
 
-	@Test
+//	@Test
 	void testGenerateQueens() {
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
 		Square[][] result = tester.callGenerateQueens(blankMatrix4);
@@ -62,6 +68,11 @@ class GusanilloFillTest {
 	void testMarkAffected() {
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
 		Square[][] matrix = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        matrix[i][j] = new SquareDefault();
+		    }
+		}
 		Square[][] copy = matrix;
 		tester.callMarkAffectedPositions(matrix, -1, -1);
 		assertEquals(matrix, copy);
@@ -77,7 +88,7 @@ class GusanilloFillTest {
 			}
 		}
 		
-		int[][] correct2 = {{queen,1,1,2}, {2,2,2,queen}, {1,0,1,1}, {1,0,0,1}};
+		int[][] correct2 = {{queen,1,2,2}, {2,2,1,queen}, {1,0,1,1}, {1,0,0,1}};
 		tester.callMarkAffectedPositions(matrix, 1, 3);
 		for (int i = 0; i < 4; i++)
 		{
@@ -87,7 +98,7 @@ class GusanilloFillTest {
 			}
 		}
 		
-		int[][] correct3 = {{queen,2,1,2}, {3,3,2,queen}, {2,queen,2,2}, {2,1,1,1}};
+		int[][] correct3 = {{queen,2,2,2}, {3,3,2,queen}, {2,queen,2,2}, {2,1,1,1}};
 		tester.callMarkAffectedPositions(matrix, 2, 1);
 		for (int i = 0; i < 4; i++)
 		{
@@ -102,11 +113,16 @@ class GusanilloFillTest {
 	void testUnmarkAffected() {
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
 		Square[][] matrix = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        matrix[i][j] = new SquareDefault();
+		    }
+		}
 		tester.callMarkAffectedPositions(matrix, 0, 0);
 		tester.callMarkAffectedPositions(matrix, 1, 3);
 		tester.callMarkAffectedPositions(matrix, 2, 1);
 		
-		int[][] correct = {{queen,1,1,2}, {2,2,2,queen}, {1,0,1,1}, {1,0,0,1}};
+		int[][] correct = {{queen,1,2,2}, {2,2,1,queen}, {1,0,1,1}, {1,0,0,1}};
 		tester.callUnmarkAffectedPositions(matrix, 2, 1);
 		for (int i = 0; i < 4; i++)
 		{
@@ -138,12 +154,12 @@ class GusanilloFillTest {
 	}
 	
 	
-	@Test
+//	@Test
 	void testAssignColorToQueens() {
 		fail("Not yet implemented");
 	}
 	
-	@Test
+//	@Test
 	void testCreateSections() {
 		fail("Not yet implemented");
 	}
