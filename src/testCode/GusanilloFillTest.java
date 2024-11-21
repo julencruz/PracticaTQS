@@ -15,7 +15,7 @@ class GusanilloFillTest {
 	
 	int available = 0;
 	int unavailable = 1;
-	int queen = 2;
+	int queen = 1000;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -57,6 +57,86 @@ class GusanilloFillTest {
 			}
 		}
 	}
+	
+	@Test
+	void testMarkAffected() {
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
+		Square[][] matrix = new Square[4][4];
+		Square[][] copy = matrix;
+		tester.callMarkAffectedPositions(matrix, -1, -1);
+		assertEquals(matrix, copy);
+		
+		int[][] correct = {{queen,unavailable,unavailable,unavailable}, {unavailable,unavailable,available,available}, 
+				{unavailable,available,available,available}, {unavailable,available,available,available}};
+		tester.callMarkAffectedPositions(matrix, 0, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(matrix[i][j].getAvailable(), correct[i][j]);
+			}
+		}
+		
+		int[][] correct2 = {{queen,1,1,2}, {2,2,2,queen}, {1,0,1,1}, {1,0,0,1}};
+		tester.callMarkAffectedPositions(matrix, 1, 3);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(matrix[i][j].getAvailable(), correct2[i][j]);
+			}
+		}
+		
+		int[][] correct3 = {{queen,2,1,2}, {3,3,2,queen}, {2,queen,2,2}, {2,1,1,1}};
+		tester.callMarkAffectedPositions(matrix, 2, 1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)	
+			{
+				assertEquals(matrix[i][j].getAvailable(), correct3[i][j]);
+			}
+		}	
+	}
+	
+	@Test
+	void testUnmarkAffected() {
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
+		Square[][] matrix = new Square[4][4];
+		tester.callMarkAffectedPositions(matrix, 0, 0);
+		tester.callMarkAffectedPositions(matrix, 1, 3);
+		tester.callMarkAffectedPositions(matrix, 2, 1);
+		
+		int[][] correct = {{queen,1,1,2}, {2,2,2,queen}, {1,0,1,1}, {1,0,0,1}};
+		tester.callUnmarkAffectedPositions(matrix, 2, 1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)	
+			{
+				assertEquals(matrix[i][j].getAvailable(), correct[i][j]);
+			}
+		}
+		
+		int[][] correct2 = {{queen,unavailable,unavailable,unavailable}, {unavailable,unavailable,available,available}, 
+				{unavailable,available,available,available}, {unavailable,available,available,available}};
+		tester.callUnmarkAffectedPositions(matrix, 1, 3);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(matrix[i][j].getAvailable(), correct2[i][j]);
+			}
+		}
+		
+		tester.callUnmarkAffectedPositions(matrix, 0, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(matrix[i][j].getAvailable(), available);
+			}
+		}
+	}
+	
 	
 	@Test
 	void testAssignColorToQueens() {
