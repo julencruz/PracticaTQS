@@ -8,6 +8,7 @@ public abstract class GenerationStrategy {
 	protected RNG rng;
 	
 	public GenerationStrategy(int size, RNG rng) {
+		assert (size < Colors.colorArray.size()) : "Not enough colors for that many queens!";
 		this.size = size;
 		this.rng = rng;
 	}
@@ -113,8 +114,8 @@ public abstract class GenerationStrategy {
 
 	protected Square[][] generateQueens(Square[][] blankMatrix){
 		blankMatrix = new Square[size][size];
-		for (int i = 0; i < 4; i++) {
-		    for (int j = 0; j < 4; j++) {
+		for (int i = 0; i < size; i++) {
+		    for (int j = 0; j < size; j++) {
 		        blankMatrix[i][j] = new SquareDefault();
 		    }
 		}
@@ -126,7 +127,17 @@ public abstract class GenerationStrategy {
 		
 	}
 	protected Square[][] assignColorToQueens(Square[][] queenMatrix){
-		
+		ArrayList<String> colors = Colors.colorArray;
+		for(int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++)
+			{
+				if (queenMatrix[i][j].getAvailable() == 1000)
+				{
+					queenMatrix[i][j].setColor(colors.remove(rng.random(0, colors.size()-1)));
+				}
+			}
+		}
+		return queenMatrix;
 	}
 	
 	protected abstract Square[][] createSections(Square[][] coloredMatrix);
