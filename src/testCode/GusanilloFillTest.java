@@ -31,10 +31,17 @@ class GusanilloFillTest {
 		    }
 		}
 		
-		blankMatrix9 = new Square[4][4];
+		blankMatrix9 = new Square[9][9];
 		for (int i = 0; i < 9; i++) {
 		    for (int j = 0; j < 9; j++) {
-		        blankMatrix4[i][j] = new SquareDefault();
+		        blankMatrix9[i][j] = new SquareDefault();
+		    }
+		}
+		
+		blankMatrix8 = new Square[8][8];
+		for (int i = 0; i < 8; i++) {
+		    for (int j = 0; j < 8; j++) {
+		        blankMatrix8[i][j] = new SquareDefault();
 		    }
 		}
 	}
@@ -161,12 +168,12 @@ class GusanilloFillTest {
 	}
 	
 	
-//	@Test
+	@Test
 	void testAssignColorToQueens() {
 		
 		
 		// probar con 4 colores, PE
-		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}}));
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0,0,0}}));
 		blankMatrix4[0][1].setAvailable(1000);
 		blankMatrix4[1][0].setAvailable(1000);
 		blankMatrix4[2][3].setAvailable(1000);
@@ -181,24 +188,9 @@ class GusanilloFillTest {
 		tester.callAssignColorToQueens(blankMatrix4);
 		assertEquals(correct, blankMatrix4);
 		
-		// probar 9 colores, uno mas de los que hay, no modifica la matriz
-		blankMatrix9[0][1].setAvailable(1000);
-		blankMatrix9[1][0].setAvailable(1000);
-		blankMatrix9[2][3].setAvailable(1000);
-		blankMatrix9[3][1].setAvailable(1000);
-		blankMatrix9[1][1].setAvailable(1000);
-		blankMatrix9[1][2].setAvailable(1000);
-		blankMatrix9[2][4].setAvailable(1000);
-		blankMatrix9[3][2].setAvailable(1000);
-		blankMatrix9[2][1].setAvailable(1000);
-		
-		Square[][] correct2 = blankMatrix9;
-		
-		tester.callAssignColorToQueens(blankMatrix9);
-		assertEquals(correct2, blankMatrix9);
-		
-		
 		// probar 8 colores, maximo posible
+		tester = new GusanilloFill(8, new MockRNG(new int[][] {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}}));
+
 		blankMatrix8[0][1].setAvailable(1000);
 		blankMatrix8[1][0].setAvailable(1000);
 		blankMatrix8[2][3].setAvailable(1000);
@@ -207,6 +199,7 @@ class GusanilloFillTest {
 		blankMatrix8[1][2].setAvailable(1000);
 		blankMatrix8[2][4].setAvailable(1000);
 		blankMatrix8[3][2].setAvailable(1000);
+		
 		
 		Square[][] correct3 = blankMatrix8;
 
@@ -220,7 +213,8 @@ class GusanilloFillTest {
 		correct3[3][2].setColor(Colors.BACKGROUND_BLACK);
 		
 		tester.callAssignColorToQueens(blankMatrix8);
-		assertEquals(correct3, blankMatrix9);
+		assertEquals(correct3, blankMatrix8);
+		
 	}
 	
 //	@Test
