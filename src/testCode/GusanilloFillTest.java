@@ -313,7 +313,7 @@ class GusanilloFillTest {
 	
 	@Test
 	void testFillBlanksAndReset() {
-		GusanilloFill tester = new GusanilloFill(3, new MockRNG(new int[][] {{1,0,2,0}, {0,2,0,0}}));		
+		GusanilloFill tester = new GusanilloFill(3, new MockRNG(new int[][] {{0,0,0,0}, {1,0,2,0}, {0,2,0,0}}));		
 
 
 		// ya que la funcion debe borrar el available de cada casilla, le ponemos una plantilla de valores para que los pueda borrar		
@@ -359,13 +359,25 @@ class GusanilloFillTest {
 		}
 		
 		
-		//seup variable reinas del state para que pueda escoger una (no hace falta en el resto de casos pq tienen almenos un vecino con color)
+		//setup variable reinas del state para que pueda escoger una (no hace falta en el resto de casos pq tienen almenos un vecino con color)
 		ArrayList<ArrayList<Integer>> queens = new ArrayList<>();
-		queens.add(new ArrayList<>(Arrays.asList(-1, 0)));
-		case1[3][3].setColor(Colors.BACKGROUND_RED);
+		queens.add(new ArrayList<>(Arrays.asList(2, 2)));
+		tester.setQueensPosition(queens);
+		
+		case1[2][2].setColor(Colors.BACKGROUND_RED);
 		
 		case1 = tester.callFillBlanksAndReset(case1);
-		assertEquals(correct1, case1);
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++) {
+				assertEquals(correct1[i][j].getColor(), case1[i][j].getColor());
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+
+			}
+		}
+//		System.out.println(correct1[i][j].getColor());
+//		System.out.println(correct1[i][j].getAvailable());
+//		System.out.println("\u001b[0m");
 		
 		
 		// Caso2: casillas vacias: 0,0 con 2 vecinos; 0,2 con 2 vecinos; 1,1 con 4 vecinos; 0,2 con 2 vecinos
@@ -406,7 +418,14 @@ class GusanilloFillTest {
 		case2[2][2].setColor(Colors.BACKGROUND_RED);
 		
 		case2 = tester.callFillBlanksAndReset(case2);
-		assertEquals(correct2, case2);
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++) {
+				assertEquals(correct2[i][j].getColor(), case2[i][j].getColor());
+				assertEquals(correct2[i][j].getAvailable(), case2[i][j].getAvailable());
+
+			}
+		}
 		
 		
 		
@@ -421,15 +440,15 @@ class GusanilloFillTest {
 		    }
 		}
 		
-		correct2[0][0].setColor(Colors.BACKGROUND_RED);
-		correct2[0][1].setColor(Colors.BACKGROUND_RED);
-		correct2[0][2].setColor(Colors.BACKGROUND_RED);
-		correct2[1][0].setColor(Colors.BACKGROUND_GREEN);
-		correct2[1][1].setColor(Colors.BACKGROUND_GREEN);
-		correct2[1][2].setColor(Colors.BACKGROUND_RED);
-		correct2[2][0].setColor(Colors.BACKGROUND_GREEN);
-		correct2[2][1].setColor(Colors.BACKGROUND_YELLOW);
-		correct2[2][2].setColor(Colors.BACKGROUND_RED);
+		correct3[0][0].setColor(Colors.BACKGROUND_RED);
+		correct3[0][1].setColor(Colors.BACKGROUND_RED);
+		correct3[0][2].setColor(Colors.BACKGROUND_RED);
+		correct3[1][0].setColor(Colors.BACKGROUND_GREEN);
+		correct3[1][1].setColor(Colors.BACKGROUND_GREEN);
+		correct3[1][2].setColor(Colors.BACKGROUND_RED);
+		correct3[2][0].setColor(Colors.BACKGROUND_GREEN);
+		correct3[2][1].setColor(Colors.BACKGROUND_YELLOW);
+		correct3[2][2].setColor(Colors.BACKGROUND_RED);
 		
 		
 		//setup matriz inicial caso 3
@@ -441,13 +460,20 @@ class GusanilloFillTest {
 		    }
 		}
 		
-		case2[0][1].setColor(Colors.BACKGROUND_RED);
-		case2[1][0].setColor(Colors.BACKGROUND_GREEN);
-		case2[2][1].setColor(Colors.BACKGROUND_YELLOW);
-		case2[2][2].setColor(Colors.BACKGROUND_RED);
+		case3[0][1].setColor(Colors.BACKGROUND_RED);
+		case3[1][0].setColor(Colors.BACKGROUND_GREEN);
+		case3[2][1].setColor(Colors.BACKGROUND_YELLOW);
+		case3[2][2].setColor(Colors.BACKGROUND_RED);
 		
 		case3 = tester.callFillBlanksAndReset(case3);
-		assertEquals(correct3, case3);
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++) {
+				assertEquals(correct3[i][j].getColor(), case3[i][j].getColor());
+				assertEquals(correct3[i][j].getAvailable(), case3[i][j].getAvailable());
+
+			}
+		}
 		
 		
 	}

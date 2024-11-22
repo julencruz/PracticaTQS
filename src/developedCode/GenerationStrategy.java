@@ -150,6 +150,7 @@ public abstract class GenerationStrategy {
 		{
 			for (int j = 0; j < size; j++)
 			{
+				sectionedMatrix[i][j].setAvailable(0);
 				if (sectionedMatrix[i][j].getColor() == "")
 				{
 				ArrayList<String> possibleColors = new ArrayList<>();
@@ -159,31 +160,40 @@ public abstract class GenerationStrategy {
 					}
 						
 					if (j+1 < size && sectionedMatrix[i][j+1].getColor() != "") {
-						possibleColors.add(sectionedMatrix[i-1][j].getColor());
+						possibleColors.add(sectionedMatrix[i][j+1].getColor());
 					}
 					if (i+1 < size && sectionedMatrix[i+1][j].getColor() != "") {
-						possibleColors.add(sectionedMatrix[i-1][j].getColor());
+						possibleColors.add(sectionedMatrix[i+1][j].getColor());
 					}
 					if (j-1 >= 0 && sectionedMatrix[i][j-1].getColor() != "") {
-						possibleColors.add(sectionedMatrix[i-1][j].getColor());
+						possibleColors.add(sectionedMatrix[i][j-1].getColor());
 					}
 					
 					String color = "";
-						
 					if (possibleColors.isEmpty()) {
 						int index = rng.random(0, queensPosition.size()-1);
 						color = sectionedMatrix[queensPosition.get(index).get(0)][queensPosition.get(index).get(1)].getColor();
 					}
 					else
 					{
-						int index = rng.random(0, possibleColors.size()-1);
-						color = possibleColors.get(index);
+						if(possibleColors.size() != 1)
+						{
+							int index = rng.random(0, possibleColors.size()-1);
+							color = possibleColors.get(index);	
+						} 
+						else 
+						{
+							color = possibleColors.get(0);
+						}
+
 					}
+					
 					
 					sectionedMatrix[i][j].setColor(color);
 				}
 			}
 		}
+		
 		return sectionedMatrix;
 	}
 	
