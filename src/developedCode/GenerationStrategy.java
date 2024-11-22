@@ -1,11 +1,13 @@
 package developedCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class GenerationStrategy {
 	protected int size;
 	protected RNG rng;
+	protected ArrayList<ArrayList<Integer>> queensPosition = new ArrayList<>();
 	
 	public GenerationStrategy(int size, RNG rng) {
 		assert (size <= Colors.colorArray.size()) : "Not enough colors for that many queens!";
@@ -36,6 +38,7 @@ public abstract class GenerationStrategy {
 		    int selectedCol = availableCols.get(randomIndex);
 		    
 	        markAffectedPositions(matrix, row, selectedCol);
+	        queensPosition.add(new ArrayList<>(Arrays.asList(row, selectedCol)));
 
 	        if (placeQueens(matrix, row + 1)) {
 	            return true;
@@ -43,6 +46,7 @@ public abstract class GenerationStrategy {
 
 	        matrix[row][selectedCol].available = 0; 
 	        unmarkAffectedPositions(matrix, row, selectedCol); 
+	        queensPosition.remove(queensPosition.size() - 1);
 	        availableCols.remove(randomIndex);
 	    }
 
@@ -53,13 +57,13 @@ public abstract class GenerationStrategy {
 		if (row >= 0 && row < size && col >= 0 && col < size)
 		{
 			for (int i = 0; i < size; i++) {
-				if (matrix[row][i].getAvailable() != 1000) {
+				if (!matrix[row][i].hasQueen()) {
 		            matrix[row][i].enable();
 		        }
 		    }
 
 		    for (int i = 0; i < size; i++) {
-		        if (matrix[i][col].getAvailable() != 1000) {
+		        if (!matrix[i][col].hasQueen()) {
 		            matrix[i][col].enable();
 		        }
 		    }
@@ -85,13 +89,13 @@ public abstract class GenerationStrategy {
 		{
 			matrix[row][col].setAvailable(1000);
 			for (int i = 0; i < size; i++) {
-				if (matrix[row][i].getAvailable() != 1000) {
+				if (!matrix[row][i].hasQueen()) {
 		            matrix[row][i].disable();
 		        }
 		    }
 
 		    for (int i = 0; i < size; i++) {
-		        if (matrix[i][col].getAvailable() != 1000) {
+		        if (!matrix[i][col].hasQueen()) {
 		            matrix[i][col].disable();
 		        }
 		    }
@@ -113,6 +117,7 @@ public abstract class GenerationStrategy {
 	
 
 	protected Square[][] generateQueens(Square[][] blankMatrix){
+		queensPosition.clear();
 		blankMatrix = new Square[size][size];
 		for (int i = 0; i < size; i++) {
 		    for (int j = 0; j < size; j++) {
@@ -126,25 +131,21 @@ public abstract class GenerationStrategy {
 	    }
 		
 	}
+	
 	protected Square[][] assignColorToQueens(Square[][] queenMatrix){
 		ArrayList<String> colors = new ArrayList<>(Colors.colorArray);
-		for(int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++)
-			{
-				if (queenMatrix[i][j].getAvailable() == 1000)
-				{
-					int index = rng.random(0, colors.size()-1);
-					queenMatrix[i][j].setColor(colors.get(index));
-					colors.remove(index);
-				}
-			}
+		for(ArrayList<Integer> coord : queensPosition) {
+			int index = rng.random(0, colors.size()-1);
+			queenMatrix[coord.get(0)][coord.get(1)].setColor(colors.get(index));
+			colors.remove(index);
+			
 		}
 		return queenMatrix;
 	}
 	
 	protected abstract Square[][] createSections(Square[][] coloredMatrix);
 	
-	protected Square[][] fillBlanks(Square[][] sectionedMatrix){
+	protected Square[][] fillBlanksAndReset(Square[][] sectionedMatrix){
 		return null;
 	}
 	
@@ -155,6 +156,10 @@ public abstract class GenerationStrategy {
 	
 	
 //	Remove when finished testing
+	
+	public void setQueensPosition(ArrayList<ArrayList<Integer>> queens) {
+		queensPosition = queens;
+	}
 	public Square[][] callGenerateQueens(Square[][] blankMatrix){
 		return generateQueens(blankMatrix);
 	}
@@ -173,5 +178,9 @@ public abstract class GenerationStrategy {
 	
 	public void callUnmarkAffectedPositions(Square[][] matrix, int row, int col){
 		unmarkAffectedPositions(matrix, row, col);
+	}
+	
+	public Square[][] callFillBlanksAndReset(Square[][] sectionedMatrix){
+		return fillBlanksAndReset(sectionedMatrix);
 	}
 }

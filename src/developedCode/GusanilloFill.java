@@ -11,46 +11,40 @@ public class GusanilloFill extends GenerationStrategy {
 
 	@Override
 	protected Square[][] createSections(Square[][] coloredMatrix) {
-		for(int i = 0; i < size; i++)
+		for(ArrayList<Integer> coords : queensPosition )
 		{
-			for (int j = 0; j < size; j++)
+			int row = coords.get(0);
+			int col = coords.get(1);
+			int stepsNumber = rng.random(1, size);
+			String color = coloredMatrix[row][col].getColor();
+			for (int i = 0; i < stepsNumber; i++)
 			{
-				if (coloredMatrix[i][j].hasQueen())
-				{
-					int row = i;
-					int col = j;
-					int stepsNumber = rng.random(1, size);
-					String color = coloredMatrix[i][j].getColor();
-					for (int k = 0; k < stepsNumber; k++)
-					{
 						
-						ArrayList<ArrayList<Integer>> steps = new ArrayList<>();
+				ArrayList<ArrayList<Integer>> steps = new ArrayList<>();
 						
-						if (row-1 >= 0 && !coloredMatrix[row-1][col].hasQueen()) {
-							steps.add(new ArrayList<>(Arrays.asList(-1, 0)));
-						}
-						
-						if (col+1 < size && !coloredMatrix[row][col+1].hasQueen()) {
-							steps.add(new ArrayList<>(Arrays.asList(0, 1)));
-						}
-						if (row+1 < size && !coloredMatrix[row+1][col].hasQueen()) {
-							steps.add(new ArrayList<>(Arrays.asList(1, 0)));
-						}
-						if (col-1 >= 0 && !coloredMatrix[row][col-1].hasQueen()) {
-							steps.add(new ArrayList<>(Arrays.asList(0, -1)));
-						}
-						
-						if (steps.isEmpty()) {
-							break;
-						}
-						
-						int direction = rng.random(0, steps.size()-1);
-						
-						row = row + steps.get(direction).get(0);
-						col = col + steps.get(direction).get(1);
-						coloredMatrix[row][col].setColor(color);
-					}
+				if (row-1 >= 0 && !coloredMatrix[row-1][col].hasQueen()) {
+					steps.add(new ArrayList<>(Arrays.asList(-1, 0)));
 				}
+						
+				if (col+1 < size && !coloredMatrix[row][col+1].hasQueen()) {
+					steps.add(new ArrayList<>(Arrays.asList(0, 1)));
+				}
+				if (row+1 < size && !coloredMatrix[row+1][col].hasQueen()) {
+					steps.add(new ArrayList<>(Arrays.asList(1, 0)));
+				}
+				if (col-1 >= 0 && !coloredMatrix[row][col-1].hasQueen()) {
+					steps.add(new ArrayList<>(Arrays.asList(0, -1)));
+				}
+						
+				if (steps.isEmpty()) {
+					break;
+				}
+						
+				int direction = rng.random(0, steps.size()-1);
+						
+				row = row + steps.get(direction).get(0);
+				col = col + steps.get(direction).get(1);
+				coloredMatrix[row][col].setColor(color);
 			}
 		}
 		return coloredMatrix;
