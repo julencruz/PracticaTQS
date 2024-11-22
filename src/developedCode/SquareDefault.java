@@ -29,6 +29,16 @@ public class SquareDefault extends Square{
 	}
 
 	@Override
+	public boolean hasQueen() {
+		if(available == 1000)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
 	public void setColor(String setColor) {	
 		color = setColor;
 	}

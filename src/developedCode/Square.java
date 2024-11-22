@@ -17,6 +17,7 @@ public abstract class Square {
 	}
 	
 	public abstract void disable();
+	public abstract boolean hasQueen();
 	public abstract void enable();
 	public abstract boolean isDisabled();
 	public abstract void setColor(String color);
