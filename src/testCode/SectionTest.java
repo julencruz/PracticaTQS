@@ -24,10 +24,10 @@ class SectionTest {
 		assertTrue(se1.getColor() == "");
 		
 		se1.disable();
-		se1.setColor(Colors.RED);
+		se1.setColor(Colors.BACKGROUND_RED);
 		
 		assertTrue(se1.isDisabled());
-		assertTrue(se1.getColor() == Colors.RED);
+		assertTrue(se1.getColor() == Colors.BACKGROUND_RED);
 		
 		se1.enable();
 		assertFalse(se1.isDisabled());
@@ -37,9 +37,9 @@ class SectionTest {
 	@Test
 	void testIsSquareInSection()
 	{
-		Section se2 = new Section(Colors.BLUE);
-		Square sq1 = new SquareDefault(Colors.BLUE);
-		Square sq2 = new SquareDefault(Colors.RED);
+		Section se2 = new Section(Colors.BACKGROUND_BLUE);
+		Square sq1 = new SquareDefault(Colors.BACKGROUND_BLUE);
+		Square sq2 = new SquareDefault(Colors.BACKGROUND_RED);
 		
 		assertTrue(se2.isSquareInSection(sq1));
 		assertFalse(se2.isSquareInSection(sq2));

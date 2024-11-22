@@ -14,6 +14,8 @@ import testClasses.MockObjects.MockRNG;
 class GusanilloFillTest {
 	Square[][] blankMatrix3;
 	Square[][] blankMatrix4;
+	Square[][] blankMatrix9;
+	Square[][] blankMatrix8;
 	
 	int available = 0;
 	int unavailable = 1;
@@ -25,6 +27,13 @@ class GusanilloFillTest {
 		blankMatrix4 = new Square[4][4];
 		for (int i = 0; i < 4; i++) {
 		    for (int j = 0; j < 4; j++) {
+		        blankMatrix4[i][j] = new SquareDefault();
+		    }
+		}
+		
+		blankMatrix9 = new Square[4][4];
+		for (int i = 0; i < 9; i++) {
+		    for (int j = 0; j < 9; j++) {
 		        blankMatrix4[i][j] = new SquareDefault();
 		    }
 		}
@@ -154,16 +163,64 @@ class GusanilloFillTest {
 	
 //	@Test
 	void testAssignColorToQueens() {
-		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0}}));
-		tester.callGenerateQueens(blankMatrix4);
+		
+		
+		// probar con 4 colores, PE
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0,0,0}, {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}}));
+		blankMatrix4[0][1].setAvailable(1000);
+		blankMatrix4[1][0].setAvailable(1000);
+		blankMatrix4[2][3].setAvailable(1000);
+		blankMatrix4[3][1].setAvailable(1000);
+		
 		Square[][] correct = blankMatrix4;
-		correct[0][1].setColor(Colors.P_RED);
-		correct[1][0].setColor(Colors.P_GREEN);
-		correct[2][3].setColor(Colors.P_BLUE);
-		correct[3][1].setColor(Colors.P_YELLOW);
+		correct[0][1].setColor(Colors.BACKGROUND_RED);
+		correct[1][0].setColor(Colors.BACKGROUND_GREEN);
+		correct[2][3].setColor(Colors.BACKGROUND_BLUE);
+		correct[3][1].setColor(Colors.BACKGROUND_YELLOW);
+		
 		tester.callAssignColorToQueens(blankMatrix4);
 		assertEquals(correct, blankMatrix4);
 		
+		// probar 9 colores, uno mas de los que hay, no modifica la matriz
+		blankMatrix9[0][1].setAvailable(1000);
+		blankMatrix9[1][0].setAvailable(1000);
+		blankMatrix9[2][3].setAvailable(1000);
+		blankMatrix9[3][1].setAvailable(1000);
+		blankMatrix9[1][1].setAvailable(1000);
+		blankMatrix9[1][2].setAvailable(1000);
+		blankMatrix9[2][4].setAvailable(1000);
+		blankMatrix9[3][2].setAvailable(1000);
+		blankMatrix9[2][1].setAvailable(1000);
+		
+		Square[][] correct2 = blankMatrix9;
+		
+		tester.callAssignColorToQueens(blankMatrix9);
+		assertEquals(correct2, blankMatrix9);
+		
+		
+		// probar 8 colores, maximo posible
+		blankMatrix8[0][1].setAvailable(1000);
+		blankMatrix8[1][0].setAvailable(1000);
+		blankMatrix8[2][3].setAvailable(1000);
+		blankMatrix8[3][1].setAvailable(1000);
+		blankMatrix8[1][1].setAvailable(1000);
+		blankMatrix8[1][2].setAvailable(1000);
+		blankMatrix8[2][4].setAvailable(1000);
+		blankMatrix8[3][2].setAvailable(1000);
+		
+		Square[][] correct3 = blankMatrix8;
+
+		correct3[0][1].setColor(Colors.BACKGROUND_RED);
+		correct3[1][0].setColor(Colors.BACKGROUND_GREEN);
+		correct3[2][3].setColor(Colors.BACKGROUND_BLUE);
+		correct3[3][1].setColor(Colors.BACKGROUND_YELLOW);
+		correct3[1][1].setColor(Colors.BACKGROUND_CYAN);
+		correct3[1][2].setColor(Colors.BACKGROUND_MAGENTA);
+		correct3[2][4].setColor(Colors.BACKGROUND_WHITE);
+		correct3[3][2].setColor(Colors.BACKGROUND_BLACK);
+		
+		tester.callAssignColorToQueens(blankMatrix8);
+		assertEquals(correct3, blankMatrix9);
 	}
 	
 //	@Test

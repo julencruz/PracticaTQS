@@ -23,15 +23,15 @@ class SquareTest {
 		assertTrue(s.getColor() == "");
 		
 		s.disable();
-		s.setColor(Colors.BLUE);
+		s.setColor(Colors.BACKGROUND_BLUE);
 		
 		assertTrue(s.isDisabled());
-		assertTrue(s.getColor() == Colors.BLUE);
+		assertTrue(s.getColor() == Colors.BACKGROUND_BLUE);
 		
-		Square s2 = new SquareDefault(Colors.RED);
+		Square s2 = new SquareDefault(Colors.BACKGROUND_RED);
 		
 		assertFalse(s2.isDisabled());
-		assertTrue(s2.getColor() == Colors.RED);
+		assertTrue(s2.getColor() == Colors.BACKGROUND_RED);
 		
 	}
 
