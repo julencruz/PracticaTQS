@@ -146,7 +146,45 @@ public abstract class GenerationStrategy {
 	protected abstract Square[][] createSections(Square[][] coloredMatrix);
 	
 	protected Square[][] fillBlanksAndReset(Square[][] sectionedMatrix){
-		return null;
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				if (sectionedMatrix[i][j].getColor() == "")
+				{
+				ArrayList<String> possibleColors = new ArrayList<>();
+						
+					if (i-1 >= 0 && sectionedMatrix[i-1][j].getColor() != "") {
+						possibleColors.add(sectionedMatrix[i-1][j].getColor());
+					}
+						
+					if (j+1 < size && sectionedMatrix[i][j+1].getColor() != "") {
+						possibleColors.add(sectionedMatrix[i-1][j].getColor());
+					}
+					if (i+1 < size && sectionedMatrix[i+1][j].getColor() != "") {
+						possibleColors.add(sectionedMatrix[i-1][j].getColor());
+					}
+					if (j-1 >= 0 && sectionedMatrix[i][j-1].getColor() != "") {
+						possibleColors.add(sectionedMatrix[i-1][j].getColor());
+					}
+					
+					String color = "";
+						
+					if (possibleColors.isEmpty()) {
+						int index = rng.random(0, queensPosition.size()-1);
+						color = sectionedMatrix[queensPosition.get(index).get(0)][queensPosition.get(index).get(1)].getColor();
+					}
+					else
+					{
+						int index = rng.random(0, possibleColors.size()-1);
+						color = possibleColors.get(index);
+					}
+					
+					sectionedMatrix[i][j].setColor(color);
+				}
+			}
+		}
+		return sectionedMatrix;
 	}
 	
 	public Square[][] generate(int size, RNG random){
