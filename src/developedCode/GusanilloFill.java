@@ -11,6 +11,4 @@ public class GusanilloFill extends GenerationStrategy {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-
 }

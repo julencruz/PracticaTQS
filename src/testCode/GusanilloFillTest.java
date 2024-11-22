@@ -185,7 +185,7 @@ class GusanilloFillTest {
 		correct[2][3].setColor(Colors.BACKGROUND_BLUE);
 		correct[3][1].setColor(Colors.BACKGROUND_YELLOW);
 		
-		tester.callAssignColorToQueens(blankMatrix4);
+		blankMatrix4 = tester.callAssignColorToQueens(blankMatrix4);
 		assertEquals(correct, blankMatrix4);
 		
 		// probar 8 colores, maximo posible
@@ -212,15 +212,45 @@ class GusanilloFillTest {
 		correct3[2][4].setColor(Colors.BACKGROUND_WHITE);
 		correct3[3][2].setColor(Colors.BACKGROUND_BLACK);
 		
-		tester.callAssignColorToQueens(blankMatrix8);
+		blankMatrix8 = tester.callAssignColorToQueens(blankMatrix8);
 		assertEquals(correct3, blankMatrix8);
 		
 	}
 	
 //	@Test
 	void testCreateSections() {
-		fail("Not yet implemented");
-	}
-	
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{3,2,1,1,4,1,2,3,2,4,0,0,0,1,2,2,1,4}}));
+		Square[][] correct = blankMatrix4;
+		
+		// test matriz 4x4, con reinas en 0,1 (red); 1,3(green); 2,0 (yellow) y 3,2 (blue) con un hueco vacio en 3,3
+		
+		correct[0][0].setColor(Colors.BACKGROUND_RED);
+		correct[0][1].setColor(Colors.BACKGROUND_RED);
+		correct[0][2].setColor(Colors.BACKGROUND_BLUE);
+		correct[0][3].setColor(Colors.BACKGROUND_BLUE);
+		correct[1][0].setColor(Colors.BACKGROUND_RED);
+		correct[1][1].setColor(Colors.BACKGROUND_RED);
+		correct[1][2].setColor(Colors.BACKGROUND_BLUE);
+		correct[1][3].setColor(Colors.BACKGROUND_GREEN);
+		correct[2][0].setColor(Colors.BACKGROUND_YELLOW);
+		correct[2][1].setColor(Colors.BACKGROUND_GREEN);
+		correct[2][2].setColor(Colors.BACKGROUND_BLUE);
+		correct[2][3].setColor(Colors.BACKGROUND_GREEN);
+		correct[3][0].setColor(Colors.BACKGROUND_YELLOW);
+		correct[3][1].setColor(Colors.BACKGROUND_YELLOW);
+		correct[3][2].setColor(Colors.BACKGROUND_BLUE);
+		correct[3][3].setColor("");
+
+		blankMatrix4[0][1].setAvailable(1000);		
+		blankMatrix4[0][1].setColor(Colors.BACKGROUND_RED);
+		blankMatrix4[1][3].setAvailable(1000);
+		blankMatrix4[1][3].setColor(Colors.BACKGROUND_GREEN);
+		blankMatrix4[2][0].setAvailable(1000);
+		blankMatrix4[2][0].setColor(Colors.BACKGROUND_YELLOW);
+		blankMatrix4[3][2].setAvailable(1000);
+		blankMatrix4[3][2].setColor(Colors.BACKGROUND_BLUE);
+
+		blankMatrix4 = tester.callCreateSections(blankMatrix4);
+		assertEquals(correct, blankMatrix4);
 
 }
