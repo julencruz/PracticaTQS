@@ -217,9 +217,9 @@ class GusanilloFillTest {
 		
 	}
 	
-//	@Test
+	@Test
 	void testCreateSections() {
-		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{3,2,1,1,4,1,2,3,2,4,0,0,0,1,2,2,1,4}}));
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{3,2,0,1,4,1,1,2,2,4,0,0,0,0,2,2,0}}));
 		Square[][] correct = blankMatrix4;
 		
 		// test matriz 4x4, con reinas en 0,1 (red); 1,3(green); 2,0 (yellow) y 3,2 (blue) con un hueco vacio en 3,3
@@ -252,5 +252,6 @@ class GusanilloFillTest {
 
 		blankMatrix4 = tester.callCreateSections(blankMatrix4);
 		assertEquals(correct, blankMatrix4);
-
+		
+	}
 }

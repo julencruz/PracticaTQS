@@ -23,19 +23,21 @@ public class GusanilloFill extends GenerationStrategy {
 					String color = coloredMatrix[i][j].getColor();
 					for (int k = 0; k < stepsNumber; k++)
 					{
+						
 						ArrayList<ArrayList<Integer>> steps = new ArrayList<>();
 						
-						if (i-1 >= 0 && !coloredMatrix[i-1][j].hasQueen()) {
+						if (row-1 >= 0 && !coloredMatrix[row-1][col].hasQueen()) {
 							steps.add(new ArrayList<>(Arrays.asList(-1, 0)));
 						}
-						if (i+1 < size && !coloredMatrix[i+1][j].hasQueen()) {
+						
+						if (col+1 < size && !coloredMatrix[row][col+1].hasQueen()) {
+							steps.add(new ArrayList<>(Arrays.asList(0, 1)));
+						}
+						if (row+1 < size && !coloredMatrix[row+1][col].hasQueen()) {
 							steps.add(new ArrayList<>(Arrays.asList(1, 0)));
 						}
-						if (j-1 >= 0 && !coloredMatrix[i][j-1].hasQueen()) {
+						if (col-1 >= 0 && !coloredMatrix[row][col-1].hasQueen()) {
 							steps.add(new ArrayList<>(Arrays.asList(0, -1)));
-						}
-						if (j+1 < size && !coloredMatrix[i][j+1].hasQueen()) {
-							steps.add(new ArrayList<>(Arrays.asList(0, 1)));
 						}
 						
 						if (steps.isEmpty()) {
