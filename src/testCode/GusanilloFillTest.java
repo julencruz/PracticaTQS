@@ -554,6 +554,90 @@ class GusanilloFillTest {
 				assertEquals(correct2[i][j].getColor(), blankMatrix4[i][j].getColor());
 			}
 		}		
+		
+		
+		
+		
+		
+		//--------------------------------nested loop testing---------------------------------
+		//Consideramos valor habitual para el bucle interno 1, ya que es un numero aleatorio y no hay "valor habitual"
+		
+		
+		//setup test bucle interno
+		Square[][] correctInteriorMatrix = new Square[8][8];
+		for (int i = 0; i < 8; i++) {
+		    for (int j = 0; j < 8; j++) {
+		    	correctInteriorMatrix[i][j] = new SquareDefault();
+		    }
+		}
+		
+		correctInteriorMatrix[7][0].setColor(Colors.BACKGROUND_RED);
+		
+		GusanilloFill loopTester = new GusanilloFill(8, new MockRNG(new int[][]{
+			{0}, {1,0}, {2,0,0}, {5,0,0,0,0,0}, {7,0,0,0,0,0,0,0},{8,0,0,0,0,0,0,0,0},
+			{1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}
+		}));
+		
+		
+		
+		Square[][] resultInteriorMatrix = new Square[8][8];
+		ArrayList<ArrayList<Integer>> oneQueen = new ArrayList<>();
+		oneQueen.add(new ArrayList<>(Arrays.asList(7,0)));
+		tester.setQueensPosition(oneQueen);
+	
+		ArrayList<Integer> valuesToTest = new ArrayList<Integer>(Arrays.asList(0,1,2,5,7,8));
+		
+		int nextRowCorr = 7;
+		int nextColCorr = 0;
+		
+		for (Integer value : valuesToTest) {
+
+			nextColCorr = 7 - value;
+		
+			for (int i = 0; i < 8; i++) {
+			    for (int j = 0; j < 8; j++) {
+			    	resultInteriorMatrix[i][j] = new SquareDefault();
+			    }
+			}
+			
+			resultInteriorMatrix[7][0].setAvailable(queen);
+			resultInteriorMatrix[7][0].setColor(Colors.BACKGROUND_RED);
+			
+			resultInteriorMatrix = tester.callCreateSections(resultInteriorMatrix);
+			
+			for (int i = 0; i < 8; i++) {
+			    for (int j = 0; j < 8; j++) {
+			    	assertEquals(correctInteriorMatrix[i][j].getColor(), resultInteriorMatrix[i][j].getColor());
+			    }
+			}
+			
+
+			correctInteriorMatrix[nextRowCorr][nextColCorr].setColor(Colors.BACKGROUND_RED);
+			
+			
+			for (int i = 7; i >= nextColCorr; i--)
+			{
+				if (i == -1) {
+					correctInteriorMatrix[0][1].setColor(Colors.BACKGROUND_RED);
+				} else {
+					correctInteriorMatrix[nextColCorr][0].setColor(Colors.BACKGROUND_RED);
+				}
+				
+			}
+			
+
+			
+		}
+			
+	
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	@Test

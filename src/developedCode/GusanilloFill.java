@@ -11,7 +11,7 @@ public class GusanilloFill extends GenerationStrategy {
 
 	@Override
 	protected Square[][] createSections(Square[][] coloredMatrix) {
-		for(ArrayList<Integer> coords : queensPosition )
+		for(ArrayList<Integer> coords : queensPosition)
 		{
 			int row = coords.get(0);
 			int col = coords.get(1);
