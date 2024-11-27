@@ -197,8 +197,20 @@ public abstract class GenerationStrategy {
 		return sectionedMatrix;
 	}
 	
-	public Square[][] generate(int size){
-		return null;
+	public Square[][] generate(){
+		Square[][] matrix = new Square[size][size];
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++)
+			{
+				matrix[i][j] = new SquareDefault();
+			}
+		}
+		matrix = generateQueens(matrix);
+		matrix = assignColorToQueens(matrix);
+		matrix = createSections(matrix);
+		matrix = fillBlanksAndReset(matrix);
+		return matrix;
+			
 	}
 	
 	
