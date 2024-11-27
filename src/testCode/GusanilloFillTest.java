@@ -571,8 +571,6 @@ class GusanilloFillTest {
 		    }
 		}
 		
-		correctInteriorMatrix[7][0].setColor(Colors.BACKGROUND_RED);
-		
 		GusanilloFill loopTester = new GusanilloFill(8, new MockRNG(new int[][]{
 			{0}, {1,0}, {2,0,0}, {5,0,0,0,0,0}, {7,0,0,0,0,0,0,0},{8,0,0,0,0,0,0,0,0},
 			{1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}
@@ -583,16 +581,24 @@ class GusanilloFillTest {
 		Square[][] resultInteriorMatrix = new Square[8][8];
 		ArrayList<ArrayList<Integer>> oneQueen = new ArrayList<>();
 		oneQueen.add(new ArrayList<>(Arrays.asList(7,0)));
-		tester.setQueensPosition(oneQueen);
+		loopTester.setQueensPosition(oneQueen);
 	
 		ArrayList<Integer> valuesToTest = new ArrayList<Integer>(Arrays.asList(0,1,2,5,7,8));
 		
-		int nextRowCorr = 7;
 		int nextColCorr = 0;
 		
+		//test bucle interno
 		for (Integer value : valuesToTest) {
-
 			nextColCorr = 7 - value;
+			for (int i = 7; i >= nextColCorr; i--)
+			{
+				if (nextColCorr == -1) {
+					correctInteriorMatrix[0][1].setColor(Colors.BACKGROUND_RED);
+				} else {
+					correctInteriorMatrix[i][0].setColor(Colors.BACKGROUND_RED);
+				}
+				
+			}	
 		
 			for (int i = 0; i < 8; i++) {
 			    for (int j = 0; j < 8; j++) {
@@ -603,7 +609,7 @@ class GusanilloFillTest {
 			resultInteriorMatrix[7][0].setAvailable(queen);
 			resultInteriorMatrix[7][0].setColor(Colors.BACKGROUND_RED);
 			
-			resultInteriorMatrix = tester.callCreateSections(resultInteriorMatrix);
+			resultInteriorMatrix = loopTester.callCreateSections(resultInteriorMatrix);
 			
 			for (int i = 0; i < 8; i++) {
 			    for (int j = 0; j < 8; j++) {
@@ -611,34 +617,79 @@ class GusanilloFillTest {
 			    }
 			}
 			
-
-			correctInteriorMatrix[nextRowCorr][nextColCorr].setColor(Colors.BACKGROUND_RED);
-			
-			
-			for (int i = 7; i >= nextColCorr; i--)
-			{
-				if (i == -1) {
-					correctInteriorMatrix[0][1].setColor(Colors.BACKGROUND_RED);
-				} else {
-					correctInteriorMatrix[nextColCorr][0].setColor(Colors.BACKGROUND_RED);
-				}
-				
+//			System.out.println(value);
+//			
+//			for (int i = 0; i < 8; i++) {
+//			    for (int j = 0; j < 8; j++) {
+//			        System.out.print(correctInteriorMatrix[i][j].getColor() + "X\033[0m");
+//			    }
+//			    System.out.print("\t"); 
+//			    for (int j = 0; j < 8; j++) {
+//			        System.out.print(resultInteriorMatrix[i][j].getColor() + "Y\033[0m");
+//			    }
+//			    System.out.println();
+//			}
+//			System.out.println(); 
+		}	
+		
+		//setup test bucle externo
+		Square[][] correctExteriorMatrix = new Square[8][8];
+		for (int i = 0; i < 8; i++) {
+		    for (int j = 0; j < 8; j++) {
+		    	correctExteriorMatrix[i][j] = new SquareDefault();
+		    }
+		}
+		Square[][] resultExteriorMatrix = new Square[8][8];
+		ArrayList<ArrayList<Integer>> exteriorQueens = new ArrayList<>();
+		
+		int col = 0;
+		for (Integer value: valuesToTest) {
+			loopTester.setQueensPosition(exteriorQueens);
+			while (exteriorQueens.size() < value){
+				exteriorQueens.add(new ArrayList<>(Arrays.asList(7, col)));
+				correctExteriorMatrix[7][col].setAvailable(queen);
+				correctExteriorMatrix[7][col].setColor(Colors.colorArray.get(col));
+				correctExteriorMatrix[6][col].setColor(Colors.colorArray.get(col));
+				col++;
 			}
 			
-
+			for (int i = 0; i < 8; i++) {
+			    for (int j = 0; j < 8; j++) {
+			    	resultExteriorMatrix[i][j] = new SquareDefault();
+			    }
+			}
+			
+			for (int i = 0; i < value; i++)
+			{
+				resultExteriorMatrix[7][i].setColor(Colors.colorArray.get(i));
+				resultExteriorMatrix[7][i].setAvailable(queen);
+			}
+			
+			resultExteriorMatrix = loopTester.callCreateSections(resultExteriorMatrix);
+			
+//			System.out.println(value);
+//			
+//			for (int i = 0; i < 8; i++) {
+//			    for (int j = 0; j < 8; j++) {
+//			        System.out.print(correctExteriorMatrix[i][j].getColor() + "X\033[0m");
+//			    }
+//			    System.out.print("\t"); 
+//			    for (int j = 0; j < 8; j++) {
+//			        System.out.print(resultExteriorMatrix[i][j].getColor() + "Y\033[0m");
+//			    }
+//			    System.out.println();
+//			}
+//			System.out.println(); 
+			
+			for (int i = 0; i < 8; i++) {
+			    for (int j = 0; j < 8; j++) {
+			    	assertEquals(correctExteriorMatrix[i][j].getColor(), resultExteriorMatrix[i][j].getColor());
+			    }
+			}
 			
 		}
-			
-	
-		
-		
-		
-		
-		
-		
-		
-		
 	}
+	
 	
 	@Test
 	void testFillBlanksAndReset() {

@@ -9,15 +9,12 @@ public class MockRNG extends RNG {
 	
 	public MockRNG(int[][] array) {
 		this.array = array;
+		i = 0;
+		j = -1;
 	}
 	
 	@Override
 	public int random(int minValue, int maxValue) {
-		if(array[0].length == 1 && array.length == 1)
-		{
-			return array[0][0];
-		}
-		
 		j++;
 		if (j >= array[i].length) {
 			j = 0;
