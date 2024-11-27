@@ -103,7 +103,7 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				correct1[i][j] = case1[i][j];
+				correct1[i][j] = new SquareDefault();
 			}
 		}
 		//no se puede disablear en -1
@@ -202,17 +202,20 @@ class GusanilloFillTest {
 	void testAssignColorToQueens() {
 		// probar con 4 colores, PE
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0,0,0}}));
-		blankMatrix4[0][1].setAvailable(1000);
-		blankMatrix4[1][0].setAvailable(1000);
-		blankMatrix4[2][3].setAvailable(1000);
-		blankMatrix4[3][1].setAvailable(1000);
+		ArrayList<ArrayList<Integer>> queens = new ArrayList<>();
+		queens.add(new ArrayList<>(Arrays.asList(0, 1)));
+		queens.add(new ArrayList<>(Arrays.asList(1, 0)));
+		queens.add(new ArrayList<>(Arrays.asList(2, 3)));
+		queens.add(new ArrayList<>(Arrays.asList(3, 1)));
+		tester.setQueensPosition(queens);
 		
 		Square[][] correct = new Square[4][4];
 		for (int i = 0; i < 4; i++) {
 		    for (int j = 0; j < 4; j++) {
-		        correct[i][j] = blankMatrix4[i][j];
+		    	correct[i][j] = new SquareDefault();
 		    }
 		}
+		
 		correct[0][1].setColor(Colors.BACKGROUND_RED);
 		correct[1][0].setColor(Colors.BACKGROUND_GREEN);
 		correct[2][3].setColor(Colors.BACKGROUND_BLUE);
@@ -228,21 +231,22 @@ class GusanilloFillTest {
 		
 		// probar 8 colores, maximo posible
 		tester = new GusanilloFill(8, new MockRNG(new int[][] {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}}));
-
-		blankMatrix8[0][1].setAvailable(1000);
-		blankMatrix8[1][0].setAvailable(1000);
-		blankMatrix8[2][3].setAvailable(1000);
-		blankMatrix8[3][1].setAvailable(1000);
-		blankMatrix8[1][1].setAvailable(1000);
-		blankMatrix8[1][2].setAvailable(1000);
-		blankMatrix8[2][4].setAvailable(1000);
-		blankMatrix8[3][2].setAvailable(1000);
+		ArrayList<ArrayList<Integer>> queens8 = new ArrayList<>();
+		queens8.add(new ArrayList<>(Arrays.asList(0, 1)));
+		queens8.add(new ArrayList<>(Arrays.asList(1, 0)));
+		queens8.add(new ArrayList<>(Arrays.asList(2, 3)));
+		queens8.add(new ArrayList<>(Arrays.asList(3, 1)));
+		queens8.add(new ArrayList<>(Arrays.asList(1, 1)));
+		queens8.add(new ArrayList<>(Arrays.asList(1, 2)));
+		queens8.add(new ArrayList<>(Arrays.asList(2, 4)));
+		queens8.add(new ArrayList<>(Arrays.asList(3, 2)));
+		tester.setQueensPosition(queens8);
 		
 		
 		Square[][] correct2 = new Square[8][8];
 		for (int i = 0; i < 8; i++) {
 		    for (int j = 0; j < 8; j++) {
-		        correct2[i][j] = blankMatrix8[i][j];
+		    	correct2[i][j] = new SquareDefault();
 		    }
 		}
 
@@ -268,11 +272,11 @@ class GusanilloFillTest {
 	
 	@Test
 	void testCreateSections() {
-		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{3,2,0,1,4,1,1,2,2,4,0,0,0,0,2,2,0}}));
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{3,2,0,1,4,1,1,2,2,2,2,0,4,0,0,0,0}}));
 		Square[][] correct = new Square[4][4];
 		for (int i = 0; i < 4; i++) {
 		    for (int j = 0; j < 4; j++) {
-		        correct[i][j] = blankMatrix4[i][j];
+		    	correct[i][j] = new SquareDefault();
 		    }
 		}
 		
@@ -294,14 +298,23 @@ class GusanilloFillTest {
 		correct[3][1].setColor(Colors.BACKGROUND_YELLOW);
 		correct[3][2].setColor(Colors.BACKGROUND_BLUE);
 		correct[3][3].setColor("");
-
+		
+		
+		ArrayList<ArrayList<Integer>> queens = new ArrayList<>();
+		queens.add(new ArrayList<>(Arrays.asList(0, 1)));
+		queens.add(new ArrayList<>(Arrays.asList(1, 3)));
+		queens.add(new ArrayList<>(Arrays.asList(2, 0)));
+		queens.add(new ArrayList<>(Arrays.asList(3, 2)));
+		tester.setQueensPosition(queens);
+		
+		
 		blankMatrix4[0][1].setAvailable(1000);		
-		blankMatrix4[0][1].setColor(Colors.BACKGROUND_RED);
 		blankMatrix4[1][3].setAvailable(1000);
-		blankMatrix4[1][3].setColor(Colors.BACKGROUND_GREEN);
 		blankMatrix4[2][0].setAvailable(1000);
-		blankMatrix4[2][0].setColor(Colors.BACKGROUND_YELLOW);
 		blankMatrix4[3][2].setAvailable(1000);
+		blankMatrix4[0][1].setColor(Colors.BACKGROUND_RED);
+		blankMatrix4[1][3].setColor(Colors.BACKGROUND_GREEN);
+		blankMatrix4[2][0].setColor(Colors.BACKGROUND_YELLOW);
 		blankMatrix4[3][2].setColor(Colors.BACKGROUND_BLUE);
 
 		blankMatrix4 = tester.callCreateSections(blankMatrix4);
@@ -309,21 +322,24 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
+				System.out.println(correct[i][j].getColor() + "X\033[0m" + blankMatrix4[i][j].getColor() + "Y\033[0m");
 				assertEquals(correct[i][j].getColor(), blankMatrix4[i][j].getColor());
 			}
+			System.out.println("");
 		}
 		
-		tester = new GusanilloFill(4, new MockRNG(new int[][] {{2,2,0,4,1,1,2,2,2,0,0,2,2,0}}));
+		tester = new GusanilloFill(4, new MockRNG(new int[][] {{2,2,0,4,1,1,2,2,2,2,0,2,0,0}}));
 		blankMatrix4 = new Square[4][4];
 		for (int i = 0; i < 4; i++) {
 		    for (int j = 0; j < 4; j++) {
 		        blankMatrix4[i][j] = new SquareDefault();
 		    }
 		}
+		tester.setQueensPosition(queens);
 		Square[][] correct2 = new Square[4][4];
 		for (int i = 0; i < 4; i++) {
 		    for (int j = 0; j < 4; j++) {
-		        correct2[i][j] = blankMatrix4[i][j];
+		        correct2[i][j] = new SquareDefault();
 		    }
 		}
 		
@@ -360,6 +376,7 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
+				System.out.println(correct[i][j].getColor() + "X\033[0m" + blankMatrix4[i][j].getColor() + "Y\033[0m");
 				assertEquals(correct2[i][j].getColor(), blankMatrix4[i][j].getColor());
 			}
 		}		
