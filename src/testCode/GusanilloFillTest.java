@@ -385,10 +385,10 @@ class GusanilloFillTest {
 	correctSeven[0][0].setColor(Colors.BACKGROUND_RED);
 	correctSeven[0][1].setColor(Colors.BACKGROUND_BLUE);
 	correctSeven[0][2].setColor(Colors.BACKGROUND_GREEN);
-	correctSeven[0][2].setColor(Colors.BACKGROUND_YELLOW);
-	correctSeven[0][0].setColor(Colors.BACKGROUND_CYAN);
-	correctSeven[0][1].setColor(Colors.BACKGROUND_MAGENTA);
-	correctSeven[0][2].setColor(Colors.BACKGROUND_WHITE);
+	correctSeven[0][3].setColor(Colors.BACKGROUND_YELLOW);
+	correctSeven[1][0].setColor(Colors.BACKGROUND_CYAN);
+	correctSeven[1][1].setColor(Colors.BACKGROUND_MAGENTA);
+	correctSeven[1][2].setColor(Colors.BACKGROUND_WHITE);
 	
 
 	resultSeven = testerSeven.callAssignColorToQueens(resultSeven);
@@ -401,7 +401,7 @@ class GusanilloFillTest {
 	
 	
 	//8 iterations
-	GusanilloFill testerEight = new GusanilloFill(4, new MockRNG(new int[][] {{0,1,0,0,0,0,0}}));
+	GusanilloFill testerEight = new GusanilloFill(4, new MockRNG(new int[][] {{0,1,0,0,0,0,0,0}}));
 	ArrayList<ArrayList<Integer>> eightQueens = new ArrayList<>();
 	eightQueens.add(new ArrayList<>(Arrays.asList(0,0)));
 	eightQueens.add(new ArrayList<>(Arrays.asList(0,1)));
@@ -427,11 +427,11 @@ class GusanilloFillTest {
 	correctEight[0][0].setColor(Colors.BACKGROUND_RED);
 	correctEight[0][1].setColor(Colors.BACKGROUND_BLUE);
 	correctEight[0][2].setColor(Colors.BACKGROUND_GREEN);
-	correctEight[0][2].setColor(Colors.BACKGROUND_YELLOW);
-	correctEight[0][0].setColor(Colors.BACKGROUND_CYAN);
-	correctEight[0][1].setColor(Colors.BACKGROUND_MAGENTA);
-	correctEight[0][2].setColor(Colors.BACKGROUND_WHITE);
-	correctEight[0][3].setColor(Colors.BACKGROUND_BLACK);
+	correctEight[0][3].setColor(Colors.BACKGROUND_YELLOW);
+	correctEight[1][0].setColor(Colors.BACKGROUND_CYAN);
+	correctEight[1][1].setColor(Colors.BACKGROUND_MAGENTA);
+	correctEight[1][2].setColor(Colors.BACKGROUND_WHITE);
+	correctEight[1][3].setColor(Colors.BACKGROUND_BLACK);
 
 	resultEight = testerEight.callAssignColorToQueens(resultEight);
 
