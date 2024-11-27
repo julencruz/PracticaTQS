@@ -322,7 +322,6 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				System.out.println(correct[i][j].getColor() + "X\033[0m" + blankMatrix4[i][j].getColor() + "Y\033[0m");
 				assertEquals(correct[i][j].getColor(), blankMatrix4[i][j].getColor());
 			}
 			System.out.println("");
@@ -376,7 +375,6 @@ class GusanilloFillTest {
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				System.out.println(correct[i][j].getColor() + "X\033[0m" + blankMatrix4[i][j].getColor() + "Y\033[0m");
 				assertEquals(correct2[i][j].getColor(), blankMatrix4[i][j].getColor());
 			}
 		}		
@@ -570,7 +568,7 @@ class GusanilloFillTest {
 		correct[2][3].setColor(Colors.BACKGROUND_BLACK);
 		correct[3][0].setColor(Colors.BACKGROUND_CYAN);
 		correct[3][1].setColor(Colors.BACKGROUND_CYAN);
-		correct[3][2].setColor(Colors.BACKGROUND_CYAN);
+		correct[3][2].setColor(Colors.BACKGROUND_BLACK);
 		correct[3][3].setColor(Colors.BACKGROUND_BLACK);
 		
 		//Primera lista: backtracking 1.
@@ -579,7 +577,7 @@ class GusanilloFillTest {
 		//Cuarta lista: Colores para reinas
 		//Quinta a octava lista: GusanilloFill de los colores azul, magenta, cyan, negro 
 		//Ultima lista: FillAndReset
-		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0}, {0,0}, {0,0,0,0}, {2,4,3,4}, {4,2,0,1,1}, {4,2,1,3,0}, {1,2}, {2,0,0}, {1,1,2}}));	
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0}, {0,0}, {0,0,0,0}, {2,4,3,4}, {4,2,0,1,1}, {4,2,1,0,0}, {1,2}, {2,0,1}, {1,2,0}}));	
 		blankMatrix4 = tester.generate();
 		
 		for (int i = 0; i < 4; i++) {
