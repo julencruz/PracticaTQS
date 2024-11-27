@@ -200,7 +200,7 @@ class GusanilloFillTest {
 	
 	@Test
 	void testAssignColorToQueens() {
-		// probar con 4 colores, PE
+		// probar con 4 colores, PE (loop testing 4 iteraciones m<n-1 && m != 0,1,2,n)
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0,0,0}}));
 		ArrayList<ArrayList<Integer>> queens = new ArrayList<>();
 		queens.add(new ArrayList<>(Arrays.asList(0, 1)));
@@ -268,7 +268,183 @@ class GusanilloFillTest {
 			}
 		}
 		
+	
+	
+	
+	
+	//--------------------------------simple loop testing---------------------------------
+	
+	//avoid loop
+	GusanilloFill testerAvoid = new GusanilloFill(4, new MockRNG(new int[][] {{0,0,0,0}}));
+	ArrayList<ArrayList<Integer>> noQueens = new ArrayList<>();
+	testerAvoid.setQueensPosition(noQueens);
+	
+	Square[][] correctAvoid = new Square[4][4];
+	Square[][] resultAvoid = new Square[4][4];
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	correctAvoid[i][j] = new SquareDefault();
+	    	resultAvoid[i][j] = new SquareDefault();
+	    }
 	}
+		
+	resultAvoid = testerAvoid.callAssignColorToQueens(resultAvoid);
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	assertEquals(correctAvoid[i][j].getColor(), resultAvoid[i][j].getColor());
+	    }
+	}
+	
+	
+	
+	
+	//1 iteration
+	GusanilloFill testerOne = new GusanilloFill(4, new MockRNG(new int[][] {{0}}));
+	ArrayList<ArrayList<Integer>> oneQueen = new ArrayList<>();
+	oneQueen.add(new ArrayList<>(Arrays.asList(0,0)));
+	testerOne.setQueensPosition(oneQueen);
+	
+	Square[][] correctOne = new Square[4][4];
+	Square[][] resultOne = new Square[4][4];
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	correctOne[i][j] = new SquareDefault();
+	    	resultOne[i][j] = new SquareDefault();
+	    }
+	}
+	
+	correctOne[0][0].setColor(Colors.BACKGROUND_RED);
+		
+	resultOne = testerOne.callAssignColorToQueens(resultOne);
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	assertEquals(correctOne[i][j].getColor(), resultOne[i][j].getColor());
+	    }
+	}
+	
+	
+	//2 iterations
+	GusanilloFill testerTwo = new GusanilloFill(4, new MockRNG(new int[][] {{0,1}}));
+	ArrayList<ArrayList<Integer>> twoQueens = new ArrayList<>();
+	twoQueens.add(new ArrayList<>(Arrays.asList(0,0)));
+	twoQueens.add(new ArrayList<>(Arrays.asList(0,1)));
+	testerTwo.setQueensPosition(twoQueens);
+	
+	Square[][] correctTwo = new Square[4][4];
+	Square[][] resultTwo = new Square[4][4];
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	correctTwo[i][j] = new SquareDefault();
+	    	resultTwo[i][j] = new SquareDefault();
+	    }
+	}
+	
+	correctTwo[0][0].setColor(Colors.BACKGROUND_RED);
+	correctTwo[0][1].setColor(Colors.BACKGROUND_BLUE);
+		
+	resultTwo = testerTwo.callAssignColorToQueens(resultTwo);
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	assertEquals(correctTwo[i][j].getColor(), resultTwo[i][j].getColor());
+	    }
+	}
+	
+	
+	
+	//4 iterations, hecho arriba
+	
+	//7 iterations
+	GusanilloFill testerSeven = new GusanilloFill(4, new MockRNG(new int[][] {{0,1,0,0,0,0,0}}));
+	ArrayList<ArrayList<Integer>> sevenQueens = new ArrayList<>();
+	sevenQueens.add(new ArrayList<>(Arrays.asList(0,0)));
+	sevenQueens.add(new ArrayList<>(Arrays.asList(0,1)));
+	sevenQueens.add(new ArrayList<>(Arrays.asList(0,2)));
+	sevenQueens.add(new ArrayList<>(Arrays.asList(0,3)));
+	sevenQueens.add(new ArrayList<>(Arrays.asList(1,0)));
+	sevenQueens.add(new ArrayList<>(Arrays.asList(1,1)));
+	sevenQueens.add(new ArrayList<>(Arrays.asList(1,2)));
+	
+	testerSeven.setQueensPosition(sevenQueens);
+	
+	Square[][] correctSeven = new Square[4][4];
+	Square[][] resultSeven = new Square[4][4];
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	correctSeven[i][j] = new SquareDefault();
+	    	resultSeven[i][j] = new SquareDefault();
+	    }
+	}
+	
+	correctSeven[0][0].setColor(Colors.BACKGROUND_RED);
+	correctSeven[0][1].setColor(Colors.BACKGROUND_BLUE);
+	correctSeven[0][2].setColor(Colors.BACKGROUND_GREEN);
+	correctSeven[0][2].setColor(Colors.BACKGROUND_YELLOW);
+	correctSeven[0][0].setColor(Colors.BACKGROUND_CYAN);
+	correctSeven[0][1].setColor(Colors.BACKGROUND_MAGENTA);
+	correctSeven[0][2].setColor(Colors.BACKGROUND_WHITE);
+	
+
+	resultSeven = testerSeven.callAssignColorToQueens(resultSeven);
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	assertEquals(correctSeven[i][j].getColor(), resultSeven[i][j].getColor());
+	    }
+	}
+	
+	
+	//8 iterations
+	GusanilloFill testerEight = new GusanilloFill(4, new MockRNG(new int[][] {{0,1,0,0,0,0,0}}));
+	ArrayList<ArrayList<Integer>> eightQueens = new ArrayList<>();
+	eightQueens.add(new ArrayList<>(Arrays.asList(0,0)));
+	eightQueens.add(new ArrayList<>(Arrays.asList(0,1)));
+	eightQueens.add(new ArrayList<>(Arrays.asList(0,2)));
+	eightQueens.add(new ArrayList<>(Arrays.asList(0,3)));
+	eightQueens.add(new ArrayList<>(Arrays.asList(1,0)));
+	eightQueens.add(new ArrayList<>(Arrays.asList(1,1)));
+	eightQueens.add(new ArrayList<>(Arrays.asList(1,2)));
+	eightQueens.add(new ArrayList<>(Arrays.asList(1,3)));
+	
+	testerEight.setQueensPosition(eightQueens);
+	
+	Square[][] correctEight = new Square[4][4];
+	Square[][] resultEight = new Square[4][4];
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	correctEight[i][j] = new SquareDefault();
+	    	resultEight[i][j] = new SquareDefault();
+	    }
+	}
+	
+	correctEight[0][0].setColor(Colors.BACKGROUND_RED);
+	correctEight[0][1].setColor(Colors.BACKGROUND_BLUE);
+	correctEight[0][2].setColor(Colors.BACKGROUND_GREEN);
+	correctEight[0][2].setColor(Colors.BACKGROUND_YELLOW);
+	correctEight[0][0].setColor(Colors.BACKGROUND_CYAN);
+	correctEight[0][1].setColor(Colors.BACKGROUND_MAGENTA);
+	correctEight[0][2].setColor(Colors.BACKGROUND_WHITE);
+	correctEight[0][3].setColor(Colors.BACKGROUND_BLACK);
+
+	resultEight = testerEight.callAssignColorToQueens(resultEight);
+
+	for (int i = 0; i < 4; i++) {
+	    for (int j = 0; j < 4; j++) {
+	    	assertEquals(correctEight[i][j].getColor(), resultEight[i][j].getColor());
+	    }
+	}
+	
+	
+}
+	
+	
 	
 	@Test
 	void testCreateSections() {

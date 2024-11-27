@@ -214,7 +214,6 @@ public abstract class GenerationStrategy {
 	}
 	
 	
-	
 //	Remove when finished testing
 	
 	public void setQueensPosition(ArrayList<ArrayList<Integer>> queens) {
