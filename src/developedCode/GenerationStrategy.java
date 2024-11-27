@@ -197,7 +197,7 @@ public abstract class GenerationStrategy {
 		return sectionedMatrix;
 	}
 	
-	public Square[][] generate(int size, RNG random){
+	public Square[][] generate(int size){
 		return null;
 	}
 	

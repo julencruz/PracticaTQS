@@ -546,4 +546,48 @@ class GusanilloFillTest {
 			}
 		}			
 	}
+	
+	@Test
+	void testGenerate() {
+		Square[][] correct = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++){
+				correct[i][j] = new SquareDefault();
+			}
+		}
+		
+		correct[0][0].setColor(Colors.BACKGROUND_BLUE);
+		correct[0][1].setColor(Colors.BACKGROUND_BLUE);
+		correct[0][2].setColor(Colors.BACKGROUND_MAGENTA);
+		correct[0][3].setColor(Colors.BACKGROUND_MAGENTA);
+		correct[1][0].setColor(Colors.BACKGROUND_BLUE);
+		correct[1][1].setColor(Colors.BACKGROUND_BLUE);
+		correct[1][2].setColor(Colors.BACKGROUND_MAGENTA);
+		correct[1][3].setColor(Colors.BACKGROUND_MAGENTA);
+		correct[2][0].setColor(Colors.BACKGROUND_CYAN);
+		correct[2][1].setColor(Colors.BACKGROUND_BLUE);
+		correct[2][2].setColor(Colors.BACKGROUND_BLACK);
+		correct[2][3].setColor(Colors.BACKGROUND_BLACK);
+		correct[3][0].setColor(Colors.BACKGROUND_CYAN);
+		correct[3][1].setColor(Colors.BACKGROUND_CYAN);
+		correct[3][2].setColor(Colors.BACKGROUND_CYAN);
+		correct[3][3].setColor(Colors.BACKGROUND_BLACK);
+		
+		//Primera lista: backtracking 1.
+		//Segunda lista: backtracking 2
+		//Tercera lista: Generación valida de reinas
+		//Cuarta lista: Colores para reinas
+		//Quinta a octava lista: GusanilloFill de los colores azul, magenta, cyan, negro 
+		//Ultima lista: FillAndReset
+		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0}, {0,0}, {0,0,0,0}, {2,4,3,4}, {4,2,0,1,1}, {4,2,1,3,0}, {1,2}, {2,0,0}, {1,1,2}}));	
+		blankMatrix4 = tester.generate();
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(correct[i][j].getColor(), blankMatrix4[i][j].getColor());
+				assertEquals(correct[i][j].getAvailable(), blankMatrix4[i][j].getAvailable());
+			}
+		}
+		
+ 	}
 }
