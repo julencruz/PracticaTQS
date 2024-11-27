@@ -53,7 +53,7 @@ class GusanilloFillTest {
 	//Test que comprueba que el placeQueens y el generateQueens funcione.
 	void testGenerateQueens() {
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
-		Square[][] result = tester.callGenerateQueens(blankMatrix4);
+		Square[][] case1 = tester.callGenerateQueens(blankMatrix4);
 		int[][] correct = {{2,queen,3,2}, {3,3,3,queen}, {queen,3,3,3}, {2,3,queen,2}};
 		//Hacemos que la matriz de 4 se solucione con la reina en 0,1. 
 		for (int i = 0; i < 4; i++)
@@ -61,28 +61,28 @@ class GusanilloFillTest {
 			for (int j = 0; j < 4; j++)
 			{
 				
-				assertEquals(result[i][j].getAvailable(), correct[i][j]);
+				assertEquals(case1[i][j].getAvailable(), correct[i][j]);
 			}
 		}
 		
 		//Hacemos que falle en las reinas (la pone en 0,0) y hace backtracking hasta solucion en 0,1
-		result = tester.callGenerateQueens(blankMatrix4);
+		case1 = tester.callGenerateQueens(blankMatrix4);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				assertEquals(result[i][j].getAvailable(), correct[i][j]);
+				assertEquals(case1[i][j].getAvailable(), correct[i][j]);
 			}
 		}
 		
 		//Hacemos que la matriz se solucione con la reina en 0,2
-		result = tester.callGenerateQueens(blankMatrix4);
+		case1 = tester.callGenerateQueens(blankMatrix4);
 		int[][] correct2 = {{2,3,queen,2}, {queen,3,3,3}, {3,3,3,queen}, {2,queen,3,2}};
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				assertEquals(result[i][j].getAvailable(), correct2[i][j]);
+				assertEquals(case1[i][j].getAvailable(), correct2[i][j]);
 			}
 		}
 	}
@@ -91,47 +91,61 @@ class GusanilloFillTest {
 	//No sirve de nada el MOCKRNG solo marcamos donde están las reinas y disableamos las otras casillas.
 	void testMarkAffected() {
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{1,0,0,0}, {0,0,0,0,0,0,0,0}, {2,0,0,0}}));
-		Square[][] matrix = new Square[4][4];
+		Square[][] case1 = new Square[4][4];
 		for (int i = 0; i < 4; i++) {
 		    for (int j = 0; j < 4; j++) {
-		        matrix[i][j] = new SquareDefault();
+		        case1[i][j] = new SquareDefault();
 		    }
 		}
-		Square[][] copy = matrix;
-		//no se puede disablear en -1
-		tester.callMarkAffectedPositions(matrix, -1, -1);
-		assertEquals(matrix, copy);
+		Square[][] correct1 = new Square[4][4];
 		
-		//disableamos desde 0,0 para comprobar que se quite fila columna y diagonales de la reina
-		int[][] correct = {{queen,1,1,1}, {1,1,0,0}, {1,0,0,0}, {1,0,0,0}};
-		tester.callMarkAffectedPositions(matrix, 0, 0);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				assertEquals(correct[i][j], matrix[i][j].getAvailable());
+				correct1[i][j] = case1[i][j];
+			}
+		}
+		//no se puede disablear en -1
+		tester.callMarkAffectedPositions(case1, -1, -1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+		
+		//disableamos desde 0,0 para comprobar que se quite fila columna y diagonales de la reina
+		int[][] correct = {{queen,1,1,1}, {1,1,0,0}, {1,0,0,0}, {1,0,0,0}};
+		tester.callMarkAffectedPositions(case1, 0, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct[i][j], case1[i][j].getAvailable());
 			}
 		}
 		
 		//disableamos desde 1,3 para comprobar que se quite fila columna y diagonales de la reina y se añada su valor a las otras
 		int[][] correct2 = {{queen,1,2,2}, {2,2,1,queen}, {1,0,1,1}, {1,0,0,1}};
-		tester.callMarkAffectedPositions(matrix, 1, 3);
+		tester.callMarkAffectedPositions(case1, 1, 3);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				assertEquals(correct2[i][j], matrix[i][j].getAvailable());
+				assertEquals(correct2[i][j], case1[i][j].getAvailable());
 			}
 		}
 		
 		//disableamos desde 2,1
 		int[][] correct3 = {{queen,2,2,2}, {3,3,2,queen}, {2,queen,2,2}, {2,1,1,1}};
-		tester.callMarkAffectedPositions(matrix, 2, 1);
+		tester.callMarkAffectedPositions(case1, 2, 1);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)	
 			{
-				assertEquals(correct3[i][j], matrix[i][j].getAvailable());
+				assertEquals(correct3[i][j], case1[i][j].getAvailable());
 			}
 		}	
 	}
@@ -186,8 +200,6 @@ class GusanilloFillTest {
 	
 	@Test
 	void testAssignColorToQueens() {
-		
-		
 		// probar con 4 colores, PE
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{0,0,0,0}}));
 		blankMatrix4[0][1].setAvailable(1000);
@@ -195,14 +207,24 @@ class GusanilloFillTest {
 		blankMatrix4[2][3].setAvailable(1000);
 		blankMatrix4[3][1].setAvailable(1000);
 		
-		Square[][] correct = blankMatrix4;
+		Square[][] correct = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        correct[i][j] = blankMatrix4[i][j];
+		    }
+		}
 		correct[0][1].setColor(Colors.BACKGROUND_RED);
 		correct[1][0].setColor(Colors.BACKGROUND_GREEN);
 		correct[2][3].setColor(Colors.BACKGROUND_BLUE);
 		correct[3][1].setColor(Colors.BACKGROUND_YELLOW);
 		
 		blankMatrix4 = tester.callAssignColorToQueens(blankMatrix4);
-		assertEquals(correct, blankMatrix4);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++) {
+				assertEquals(correct[i][j].getColor(), blankMatrix4[i][j].getColor());
+			}
+		}
 		
 		// probar 8 colores, maximo posible
 		tester = new GusanilloFill(8, new MockRNG(new int[][] {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}}));
@@ -217,26 +239,42 @@ class GusanilloFillTest {
 		blankMatrix8[3][2].setAvailable(1000);
 		
 		
-		Square[][] correct3 = blankMatrix8;
+		Square[][] correct2 = new Square[8][8];
+		for (int i = 0; i < 8; i++) {
+		    for (int j = 0; j < 8; j++) {
+		        correct2[i][j] = blankMatrix8[i][j];
+		    }
+		}
 
-		correct3[0][1].setColor(Colors.BACKGROUND_RED);
-		correct3[1][0].setColor(Colors.BACKGROUND_GREEN);
-		correct3[2][3].setColor(Colors.BACKGROUND_BLUE);
-		correct3[3][1].setColor(Colors.BACKGROUND_YELLOW);
-		correct3[1][1].setColor(Colors.BACKGROUND_CYAN);
-		correct3[1][2].setColor(Colors.BACKGROUND_MAGENTA);
-		correct3[2][4].setColor(Colors.BACKGROUND_WHITE);
-		correct3[3][2].setColor(Colors.BACKGROUND_BLACK);
+		correct2[0][1].setColor(Colors.BACKGROUND_RED);
+		correct2[1][0].setColor(Colors.BACKGROUND_GREEN);
+		correct2[2][3].setColor(Colors.BACKGROUND_BLUE);
+		correct2[3][1].setColor(Colors.BACKGROUND_YELLOW);
+		correct2[1][1].setColor(Colors.BACKGROUND_CYAN);
+		correct2[1][2].setColor(Colors.BACKGROUND_MAGENTA);
+		correct2[2][4].setColor(Colors.BACKGROUND_WHITE);
+		correct2[3][2].setColor(Colors.BACKGROUND_BLACK);
 		
 		blankMatrix8 = tester.callAssignColorToQueens(blankMatrix8);
-		assertEquals(correct3, blankMatrix8);
+		for (int i = 0; i < 8; i++)
+		{
+			for (int j = 0; j < 8; j++)
+			{
+				assertEquals(correct2[i][j].getColor(), blankMatrix8[i][j].getColor());
+			}
+		}
 		
 	}
 	
 	@Test
 	void testCreateSections() {
 		GusanilloFill tester = new GusanilloFill(4, new MockRNG(new int[][] {{3,2,0,1,4,1,1,2,2,4,0,0,0,0,2,2,0}}));
-		Square[][] correct = blankMatrix4;
+		Square[][] correct = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        correct[i][j] = blankMatrix4[i][j];
+		    }
+		}
 		
 		// test matriz 4x4, con reinas en 0,1 (red); 1,3(green); 2,0 (yellow) y 3,2 (blue) con un hueco vacio en 3,3
 		
@@ -267,7 +305,13 @@ class GusanilloFillTest {
 		blankMatrix4[3][2].setColor(Colors.BACKGROUND_BLUE);
 
 		blankMatrix4 = tester.callCreateSections(blankMatrix4);
-		assertEquals(correct, blankMatrix4);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct[i][j].getColor(), blankMatrix4[i][j].getColor());
+			}
+		}
 		
 		tester = new GusanilloFill(4, new MockRNG(new int[][] {{2,2,0,4,1,1,2,2,2,0,0,2,2,0}}));
 		blankMatrix4 = new Square[4][4];
@@ -276,7 +320,12 @@ class GusanilloFillTest {
 		        blankMatrix4[i][j] = new SquareDefault();
 		    }
 		}
-		Square[][] correct2 = blankMatrix4;
+		Square[][] correct2 = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        correct2[i][j] = blankMatrix4[i][j];
+		    }
+		}
 		
 		// test matriz 4x4, con reinas en 0,1 (red); 1,3(green); 2,0 (yellow) y 3,2 (blue) con un hueco vacio en 3,3
 		
@@ -307,8 +356,13 @@ class GusanilloFillTest {
 		blankMatrix4[3][2].setColor(Colors.BACKGROUND_BLUE);
 		
 		blankMatrix4 = tester.callCreateSections(blankMatrix4);
-		assertEquals(correct2, blankMatrix4);
-		
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct2[i][j].getColor(), blankMatrix4[i][j].getColor());
+			}
+		}		
 	}
 	
 	@Test
@@ -473,8 +527,6 @@ class GusanilloFillTest {
 				assertEquals(correct3[i][j].getAvailable(), case3[i][j].getAvailable());
 
 			}
-		}
-		
-		
+		}			
 	}
 }
