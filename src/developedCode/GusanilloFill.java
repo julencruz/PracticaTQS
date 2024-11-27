@@ -15,7 +15,7 @@ public class GusanilloFill extends GenerationStrategy {
 		{
 			int row = coords.get(0);
 			int col = coords.get(1);
-			int stepsNumber = rng.random(1, size);
+			int stepsNumber = rng.random(0, size);
 			String color = coloredMatrix[row][col].getColor();
 			for (int i = 0; i < stepsNumber; i++)
 			{
