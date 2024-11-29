@@ -213,6 +213,9 @@ public abstract class GenerationStrategy {
 			
 	}
 	
+	public ArrayList<ArrayList<Integer>> getQueensPosition() {
+		return queensPosition;
+	}
 	
 //	Remove when finished testing
 	
