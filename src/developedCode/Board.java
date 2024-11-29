@@ -13,7 +13,8 @@ public class Board {
 	}
 	
 	public void generateBoard() {
-		
+		squares = strategy.generate();
+		createSections(strategy.getQueensPosition());
 	}
 	
 	public void removeQueenInSection(int x, int y) {
