@@ -137,6 +137,7 @@ class BoardTest {
 		mockMatrix[1][1].setColor(Colors.BACKGROUND_MAGENTA);
 		mockMatrix[1][2].setColor(Colors.BACKGROUND_WHITE);
 		mockMatrix[1][3].setColor(Colors.BACKGROUND_BLACK);
+		board.setMatrix(mockMatrix);
 
 		ArrayList<ArrayList<Integer>> noQueens = new ArrayList<>();
 		ArrayList<ArrayList<Integer>> oneQueen= new ArrayList<>();
