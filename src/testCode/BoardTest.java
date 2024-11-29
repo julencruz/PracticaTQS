@@ -436,7 +436,7 @@ class BoardTest {
 		}
 		
 		mockMatrix[0][0].setAvailable(0);
-		board.enableSquare(1, 1);
+		board.enableSquare(0, 0);
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());

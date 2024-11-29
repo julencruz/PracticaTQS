@@ -32,7 +32,10 @@ public class Board {
 	}
 	
 	public void disableSquare(int x, int y) {
-		squares[x][y].disable();
+		if (x < size && x >= 0 && y < size && y >=0) {
+			squares[x][y].disable();
+		}
+		
 	}
 	
 	
@@ -46,7 +49,10 @@ public class Board {
 	}
 	
 	public void enableSquare(int x, int y) {
-		squares[x][y].enable();
+		if(x >= 0 && x < size && y >= 0 && y < size)
+		{
+			squares[x][y].enable();
+		}
 	}
 	
 	public boolean isSquareAvailable(int x, int y) {
