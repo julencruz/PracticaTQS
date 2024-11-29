@@ -30,6 +30,7 @@ public class Board {
 	
 	
 	private void createSections(ArrayList<ArrayList<Integer>> queensPosition) {
+		sections.clear();
 		String color = null;
 		for (ArrayList<Integer> coords : queensPosition) {
 			color = squares[coords.get(0)][coords.get(1)].getColor();

@@ -179,6 +179,7 @@ class BoardTest {
 		eightQueensCorrect.add(new Section(Colors.BACKGROUND_BLACK));
 		
 		ArrayList<ArrayList<ArrayList<Integer>>> queensArray = new ArrayList<>();
+		queensArray.add(noQueens);
 		queensArray.add(oneQueen);
 		queensArray.add(twoQueens);
 		queensArray.add(fiveQueens);
