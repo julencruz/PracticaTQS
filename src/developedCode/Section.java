@@ -6,7 +6,7 @@ public class Section {
 	
 	public Section() {
 		color = "";
-		disabled = true;
+		disabled = false;
 	}
 	public Section(String initColor) {
 		color = initColor;

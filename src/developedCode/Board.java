@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Board {
 	private Square[][] squares;
-	private ArrayList<Section> sections;
+	private ArrayList<Section> sections = new ArrayList<>();
 	private GenerationStrategy strategy;
 	private int size;
 	
