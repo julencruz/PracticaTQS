@@ -209,7 +209,7 @@ class BoardTest {
 	}
 
 
-//	@Test
+	@Test
 	void testDisableAndEnableSquare()
 	{
 		board = new Board(mockGenStat, 4);

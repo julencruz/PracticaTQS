@@ -32,8 +32,8 @@ public class Board {
 	}
 	
 	public void disableSquare(int x, int y) {
-		
-		}
+		squares[x][y].disable();
+	}
 	
 	
 	private void createSections(ArrayList<ArrayList<Integer>> queensPosition) {
@@ -46,7 +46,7 @@ public class Board {
 	}
 	
 	public void enableSquare(int x, int y) {
-
+		squares[x][y].enable();
 	}
 	
 	public boolean isSquareAvailable(int x, int y) {
