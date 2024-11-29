@@ -118,7 +118,16 @@ class BoardTest {
 		queens.add(new ArrayList<>(Arrays.asList(3, 2)));
 		
 		board = new Board(mockGenStat,4);
+		board.setMatrix(mockMatrix);
+		
 		board.callCreateSections(queens);
+		
+		for (int i = 0; i < 4; i++)
+		{
+			assertEquals(correctSections.get(i).getColor(), board.getSections().get(i).getColor());
+			assertEquals(correctSections.get(i).isDisabled(), board.getSections().get(i).isDisabled());
+		}
+		
 	}
 	
 	@Test
