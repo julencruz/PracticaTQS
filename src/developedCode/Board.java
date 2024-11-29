@@ -27,6 +27,11 @@ public class Board {
 	public void disableSquare(int x, int y) {
 	}
 	
+	
+	private void createSections(ArrayList<ArrayList<Integer>> queensPosition) {
+		
+	}
+	
 	public void enableSquare(int x, int y) {
 
 	}
@@ -40,7 +45,16 @@ public class Board {
 		return squares;
 	}
 	
+	public void setMatrix(Square[][] matrix) {
+		squares = matrix;
+	}
+	
 	public ArrayList<Section> getSections() {
 		return sections;
+	}
+	
+	
+	public void callCreateSections(ArrayList<ArrayList<Integer>> queensPosition){
+		createSections(queensPosition);
 	}
 }
