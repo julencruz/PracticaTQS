@@ -212,6 +212,237 @@ class BoardTest {
 //	@Test
 	void testDisableAndEnableSquare()
 	{
+		board = new Board(mockGenStat, 4);
+		board.setMatrix(mockMatrix);
 		
+		
+		//valores que dan error
+		board.disableSquare(-10, -10);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(-1, -1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(4, 4);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(100, 100);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(-10, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(-10, 100);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(1, 100);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(1, -10);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(100, -10);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.disableSquare(100, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		//valores que cambian
+		
+		mockMatrix[0][0].setAvailable(1);
+		board.disableSquare(0, 0);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		mockMatrix[1][1].setAvailable(1);
+		board.disableSquare(1, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		mockMatrix[2][2].setAvailable(1);
+		board.disableSquare(2, 2);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		mockMatrix[3][3].setAvailable(1);
+		board.disableSquare(3, 3);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		mockMatrix[1][1].setAvailable(2);
+		board.disableSquare(1, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		//------------------------------ENABLE-----------------------------------
+		
+			//valores que dan error
+		board.enableSquare(-10, -10);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(-1, -1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(4, 4);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(100, 100);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(-10, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(-10, 100);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(1, 100);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(1, -10);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(100, -10);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		board.enableSquare(100, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		//valores que cambian
+		mockMatrix[1][1].setAvailable(1);
+		board.enableSquare(1, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		mockMatrix[3][3].setAvailable(0);
+		board.enableSquare(3, 3);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		mockMatrix[2][2].setAvailable(0);
+		board.enableSquare(2, 2);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		mockMatrix[1][1].setAvailable(0);
+		board.enableSquare(1, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+		mockMatrix[0][0].setAvailable(0);
+		board.enableSquare(1, 1);
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				assertEquals(mockMatrix[i][j].isDisabled(), board.getMatrix()[i][j].isDisabled());
+			}
+		}
+		
+
 	}
 }
