@@ -207,4 +207,10 @@ class BoardTest {
 		fail("Not yet implemented");
 	}
 
+
+//	@Test
+	void testDisableAndEnableSquare()
+	{
+		
+	}
 }

@@ -10,6 +10,12 @@ public class Board {
 	public Board (GenerationStrategy strategy, int size) {
 		this.strategy = strategy;
 		this.size = size;
+		squares = new Square[size][size];
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				squares[i][j] = new SquareDefault();
+			}
+		}
 	}
 	
 	public void generateBoard() {
@@ -26,7 +32,8 @@ public class Board {
 	}
 	
 	public void disableSquare(int x, int y) {
-	}
+		
+		}
 	
 	
 	private void createSections(ArrayList<ArrayList<Integer>> queensPosition) {
@@ -52,7 +59,11 @@ public class Board {
 	}
 	
 	public void setMatrix(Square[][] matrix) {
-		squares = matrix;
+		for (int i = 0; i < matrix[0].length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				squares[i][j].clone(matrix[i][j]);
+			}
+		}
 	}
 	
 	public ArrayList<Section> getSections() {
