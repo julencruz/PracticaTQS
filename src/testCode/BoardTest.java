@@ -130,12 +130,12 @@ class BoardTest {
 		
 	}
 	
-	@Test
+//	@Test
 	void testPlaceQueenInSection() {
 		fail("Not yet implemented");
 	}
 	
-	@Test
+//	@Test
 	void testRemoveQueenInSection() {
 		fail("Not yet implemented");
 	}
