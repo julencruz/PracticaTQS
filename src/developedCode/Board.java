@@ -29,7 +29,11 @@ public class Board {
 	
 	
 	private void createSections(ArrayList<ArrayList<Integer>> queensPosition) {
-		
+		String color = null;
+		for (ArrayList<Integer> coords : queensPosition) {
+			color = squares[coords.get(0)][coords.get(1)].getColor();
+			sections.add(new Section(color));
+		}
 	}
 	
 	public void enableSquare(int x, int y) {
