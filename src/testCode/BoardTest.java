@@ -129,13 +129,6 @@ class BoardTest {
 		}
 		
 //		------------------------ Simple loop testing ----------------------------
-		ArrayList<ArrayList<Integer>> queens = new ArrayList<>();
-		queens.add(new ArrayList<>(Arrays.asList(0, 1)));
-		queens.add(new ArrayList<>(Arrays.asList(1, 3)));
-		queens.add(new ArrayList<>(Arrays.asList(2, 0)));
-		queens.add(new ArrayList<>(Arrays.asList(3, 2)));
-		
-		
 		mockMatrix[0][0].setColor(Colors.BACKGROUND_RED);
 		mockMatrix[0][1].setColor(Colors.BACKGROUND_GREEN);
 		mockMatrix[0][2].setColor(Colors.BACKGROUND_BLUE);
