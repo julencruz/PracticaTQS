@@ -128,6 +128,79 @@ class BoardTest {
 			assertEquals(correctSections.get(i).isDisabled(), board.getSections().get(i).isDisabled());
 		}
 		
+//		------------------------ Simple loop testing ----------------------------
+		ArrayList<ArrayList<Integer>> queens = new ArrayList<>();
+		queens.add(new ArrayList<>(Arrays.asList(0, 1)));
+		queens.add(new ArrayList<>(Arrays.asList(1, 3)));
+		queens.add(new ArrayList<>(Arrays.asList(2, 0)));
+		queens.add(new ArrayList<>(Arrays.asList(3, 2)));
+		
+		
+		mockMatrix[0][0].setColor(Colors.BACKGROUND_RED);
+		mockMatrix[0][1].setColor(Colors.BACKGROUND_GREEN);
+		mockMatrix[0][2].setColor(Colors.BACKGROUND_BLUE);
+		mockMatrix[0][3].setColor(Colors.BACKGROUND_YELLOW);
+		mockMatrix[1][0].setColor(Colors.BACKGROUND_CYAN);
+		mockMatrix[1][1].setColor(Colors.BACKGROUND_MAGENTA);
+		mockMatrix[1][2].setColor(Colors.BACKGROUND_WHITE);
+		mockMatrix[1][3].setColor(Colors.BACKGROUND_BLACK);
+
+		ArrayList<ArrayList<Integer>> noQueens = new ArrayList<>();
+		ArrayList<ArrayList<Integer>> oneQueen= new ArrayList<>();
+		oneQueen.add(new ArrayList<>(Arrays.asList(0, 0)));
+		ArrayList<ArrayList<Integer>> twoQueens= new ArrayList<>();
+		twoQueens.add(new ArrayList<>(Arrays.asList(0,0)));
+		twoQueens.add(new ArrayList<>(Arrays.asList(0,1)));
+		ArrayList<ArrayList<Integer>> fiveQueens= new ArrayList<>();
+		fiveQueens.add(new ArrayList<>(Arrays.asList(0, 0)));
+		fiveQueens.add(new ArrayList<>(Arrays.asList(0, 1)));
+		fiveQueens.add(new ArrayList<>(Arrays.asList(0, 2)));
+		fiveQueens.add(new ArrayList<>(Arrays.asList(0, 3)));
+		fiveQueens.add(new ArrayList<>(Arrays.asList(1, 0)));
+		ArrayList<ArrayList<Integer>> sevenQueens= new ArrayList<>();
+		sevenQueens.add(new ArrayList<>(Arrays.asList(0,0)));
+		sevenQueens.add(new ArrayList<>(Arrays.asList(0,1)));
+		sevenQueens.add(new ArrayList<>(Arrays.asList(0,2)));
+		sevenQueens.add(new ArrayList<>(Arrays.asList(0,3)));
+		sevenQueens.add(new ArrayList<>(Arrays.asList(1,0)));
+		sevenQueens.add(new ArrayList<>(Arrays.asList(1,1)));
+		sevenQueens.add(new ArrayList<>(Arrays.asList(1,2)));
+		ArrayList<ArrayList<Integer>> eightQueens= new ArrayList<>();
+		eightQueens.add(new ArrayList<>(Arrays.asList(0, 0)));
+		eightQueens.add(new ArrayList<>(Arrays.asList(0, 1)));
+		eightQueens.add(new ArrayList<>(Arrays.asList(0, 2)));
+		eightQueens.add(new ArrayList<>(Arrays.asList(0, 3)));
+		eightQueens.add(new ArrayList<>(Arrays.asList(1, 0)));
+		eightQueens.add(new ArrayList<>(Arrays.asList(1, 1)));
+		eightQueens.add(new ArrayList<>(Arrays.asList(1, 2)));
+		eightQueens.add(new ArrayList<>(Arrays.asList(1, 3)));
+
+		ArrayList<Section> eightQueensCorrect= new ArrayList<>();
+		eightQueensCorrect.add(new Section(Colors.BACKGROUND_RED));
+		eightQueensCorrect.add(new Section(Colors.BACKGROUND_GREEN));
+		eightQueensCorrect.add(new Section(Colors.BACKGROUND_BLUE));
+		eightQueensCorrect.add(new Section(Colors.BACKGROUND_YELLOW));
+		eightQueensCorrect.add(new Section(Colors.BACKGROUND_CYAN));
+		eightQueensCorrect.add(new Section(Colors.BACKGROUND_MAGENTA));
+		eightQueensCorrect.add(new Section(Colors.BACKGROUND_WHITE));
+		eightQueensCorrect.add(new Section(Colors.BACKGROUND_BLACK));
+		
+		ArrayList<ArrayList<ArrayList<Integer>>> queensArray = new ArrayList<>();
+		queensArray.add(oneQueen);
+		queensArray.add(twoQueens);
+		queensArray.add(fiveQueens);
+		queensArray.add(sevenQueens);
+		queensArray.add(eightQueens);
+		
+		for (int i = 0; i < 6; i++) {
+			board.callCreateSections(queensArray.get(i));
+			assertEquals(queensArray.get(i).size(), board.getSections().size());
+			for (int j = 0; j < queensArray.get(i).size(); j++) {
+				assertEquals(eightQueensCorrect.get(j).getColor(), board.getSections().get(j).getColor());
+				assertEquals(eightQueensCorrect.get(j).isDisabled(), board.getSections().get(j).isDisabled());
+			}
+			
+		}
 	}
 	
 //	@Test
