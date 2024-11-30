@@ -247,10 +247,19 @@ class BoardTest {
 		board.setMatrix(mockMatrix);
 		board.setSections(sections);
 		
+		//poner dentro del tablero pero que no se puede
 		assertFalse(board.isSquareAvailable(2,3));
 		assertFalse(board.isSquareAvailable(3,2));
 		assertFalse(board.isSquareAvailable(2,1));
+		
+		//poner dentro del tablero y si se puede
 		assertTrue(board.isSquareAvailable(0,0));
+		
+		//poner fuera del tablero
+		assertFalse(board.isSquareAvailable(-1,-1));
+		assertFalse(board.isSquareAvailable(-10,-10));
+		assertFalse(board.isSquareAvailable(100,100));
+		assertFalse(board.isSquareAvailable(4,4));
 	}
 
 
