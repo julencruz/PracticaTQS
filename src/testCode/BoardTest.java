@@ -18,10 +18,14 @@ import developedCode.Square;
 import developedCode.SquareDefault;
 
 class BoardTest {
+	
+	
 	GenerationStrategy mockGenStat;
 	ArrayList<Section> sections = new ArrayList<>();
 	Square[][] mockMatrix;
 	Board board;
+	
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		mockGenStat = mock(GusanilloFill.class);

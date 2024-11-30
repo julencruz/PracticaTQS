@@ -103,4 +103,8 @@ public class Board {
 	public void callCreateSections(ArrayList<ArrayList<Integer>> queensPosition){
 		createSections(queensPosition);
 	}
+
+	public int getSize() {
+		return size;
+	}
 }
