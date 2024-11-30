@@ -57,13 +57,14 @@ public class Board {
 	}
 	
 	public boolean isSquareAvailable(int x, int y) {
+		boolean available = false;
 		if (x >= 0 && x < size && y >= 0 && y < size) {
 			Square square = squares[x][y];
 			if(!square.isDisabled() && getSquaresSection(square) != null && !getSquaresSection(square).isDisabled()){
-				return true;
+				available = true;
 			}
 		}
-		return false;
+		return available;
 	}
 	
 	private Section getSquaresSection(Square sq) {

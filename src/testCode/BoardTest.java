@@ -198,12 +198,7 @@ class BoardTest {
 	}
 	
 //	@Test
-	void testPlaceQueenInSection() {
-		fail("Not yet implemented");
-	}
-	
-//	@Test
-	void testRemoveQueenInSection() {
+	void testPlaceAndRemoveQueenInSection() {
 		fail("Not yet implemented");
 	}
 	
@@ -247,19 +242,26 @@ class BoardTest {
 		board.setMatrix(mockMatrix);
 		board.setSections(sections);
 		
+		//Path coverage 
 		//poner dentro del tablero pero que no se puede
+		//Path 1
 		assertFalse(board.isSquareAvailable(2,3));
+		
 		assertFalse(board.isSquareAvailable(3,2));
 		assertFalse(board.isSquareAvailable(2,1));
 		
 		//poner dentro del tablero y si se puede
+		//Path 2
 		assertTrue(board.isSquareAvailable(0,0));
 		
 		//poner fuera del tablero
+		//Path 3
 		assertFalse(board.isSquareAvailable(-1,-1));
+		
 		assertFalse(board.isSquareAvailable(-10,-10));
 		assertFalse(board.isSquareAvailable(100,100));
 		assertFalse(board.isSquareAvailable(4,4));
+		
 	}
 
 	@Test
@@ -284,9 +286,6 @@ class BoardTest {
 		assertEquals(sections.get(2),board.callGetSquaresSection(sq3));
 		assertEquals(sections.get(3),board.callGetSquaresSection(sq4));
 		assertEquals(null, board.callGetSquaresSection(sq5));
-
-
-		
 	}
 
 	@Test
