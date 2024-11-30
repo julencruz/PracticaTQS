@@ -37,7 +37,7 @@ class BoardTest {
 		}
 	}
 
-//	@Test
+	@Test
 	void testGenerateBoard() {
 		
 		mockMatrix[0][0].setColor(Colors.BACKGROUND_YELLOW);
@@ -307,7 +307,7 @@ class BoardTest {
 		mockMatrix[0][2].setColor(Colors.BACKGROUND_BLUE);
 		mockMatrix[0][3].setColor(Colors.BACKGROUND_BLUE);
 		mockMatrix[1][0].setColor(Colors.BACKGROUND_YELLOW);
-		mockMatrix[1][1].setColor(Colors.BACKGROUND_YELLOW);
+		mockMatrix[1][1].setColor(Colors.BACKGROUND_WHITE);
 		mockMatrix[1][2].setColor(Colors.BACKGROUND_YELLOW);
 		mockMatrix[1][3].setColor(Colors.BACKGROUND_MAGENTA);
 		mockMatrix[2][0].setColor(Colors.BACKGROUND_RED);
@@ -339,24 +339,26 @@ class BoardTest {
 		board.setSections(sections);
 		
 		//Path coverage 
-		//poner dentro del tablero pero que no se puede
 		//Path 1
 		assertFalse(board.isSquareAvailable(2,3));
-		
-		assertFalse(board.isSquareAvailable(3,2));
-		assertFalse(board.isSquareAvailable(2,1));
-		
-		//poner dentro del tablero y si se puede
 		//Path 2
 		assertTrue(board.isSquareAvailable(0,0));
-		
-		//poner fuera del tablero
 		//Path 3
 		assertFalse(board.isSquareAvailable(-1,-1));
 		
-		assertFalse(board.isSquareAvailable(-10,-10));
-		assertFalse(board.isSquareAvailable(100,100));
+		//poner dentro del tablero pero que no se puede
+		assertFalse(board.isSquareAvailable(3,2));
+		assertFalse(board.isSquareAvailable(2,1));
+		assertFalse(board.isSquareAvailable(1,1));
+
+		//Decision/condition coverage
+		assertFalse(board.isSquareAvailable(1,-10));
+		assertFalse(board.isSquareAvailable(1,100));
 		assertFalse(board.isSquareAvailable(4,4));
+		assertFalse(board.isSquareAvailable(-10,-10));
+		assertFalse(board.isSquareAvailable(-10,1));
+		assertFalse(board.isSquareAvailable(100,1));
+		assertFalse(board.isSquareAvailable(100,100));
 	}
 
 	@Test

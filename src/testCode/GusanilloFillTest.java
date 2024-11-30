@@ -116,6 +116,80 @@ class GusanilloFillTest {
 			}
 		}
 		
+		tester.callMarkAffectedPositions(case1, -100, 1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+	
+		tester.callMarkAffectedPositions(case1, -1, 100);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+	
+		tester.callMarkAffectedPositions(case1, 100, 100);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+		
+		tester.callMarkAffectedPositions(case1, 100, 1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+		
+		tester.callMarkAffectedPositions(case1, 0, -1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+	
+		tester.callMarkAffectedPositions(case1, -1, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+		
+		tester.callMarkAffectedPositions(case1, -10, -10);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+		
+		tester.callMarkAffectedPositions(case1, 1, 100);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct1[i][j].getAvailable(), case1[i][j].getAvailable());
+			}
+		}
+		
+		
+		
 		//disableamos desde 0,0 para comprobar que se quite fila columna y diagonales de la reina
 		int[][] correct = {{queen,1,1,1}, {1,1,0,0}, {1,0,0,0}, {1,0,0,0}};
 		tester.callMarkAffectedPositions(case1, 0, 0);
@@ -126,7 +200,7 @@ class GusanilloFillTest {
 				assertEquals(correct[i][j], case1[i][j].getAvailable());
 			}
 		}
-		
+	
 		//disableamos desde 1,3 para comprobar que se quite fila columna y diagonales de la reina y se añada su valor a las otras
 		int[][] correct2 = {{queen,1,2,2}, {2,2,1,queen}, {1,0,1,1}, {1,0,0,1}};
 		tester.callMarkAffectedPositions(case1, 1, 3);
@@ -195,6 +269,111 @@ class GusanilloFillTest {
 				assertEquals(available, matrix[i][j].getAvailable());
 			}
 		}
+		
+		
+		tester.callMarkAffectedPositions(matrix, 3, 3);
+		tester.callUnmarkAffectedPositions(matrix, 3, 3);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+		
+		tester.callMarkAffectedPositions(matrix, 3, 0);
+		tester.callUnmarkAffectedPositions(matrix, 3, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+		
+		
+		
+		tester.callUnmarkAffectedPositions(matrix, -1, -1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+		
+		tester.callUnmarkAffectedPositions(matrix, -100, 1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+	
+		tester.callUnmarkAffectedPositions(matrix, -1, 100);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+	
+		tester.callUnmarkAffectedPositions(matrix, 100, 100);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+		
+		tester.callUnmarkAffectedPositions(matrix, 100, 1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+		
+		tester.callUnmarkAffectedPositions(matrix, 0, -1);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+	
+		tester.callUnmarkAffectedPositions(matrix, -1, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+		
+		tester.callUnmarkAffectedPositions(matrix, -10, -10);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+		
+		tester.callUnmarkAffectedPositions(matrix, 1, 100);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(available, matrix[i][j].getAvailable());
+			}
+		}
+				
 	}
 	
 	
@@ -553,11 +732,49 @@ class GusanilloFillTest {
 			{
 				assertEquals(correct2[i][j].getColor(), blankMatrix4[i][j].getColor());
 			}
-		}		
+		}
 		
+		ArrayList<ArrayList<Integer>> fourQueens = new ArrayList<>();
+		fourQueens.add(new ArrayList<>(Arrays.asList(0, 0)));
+		fourQueens.add(new ArrayList<>(Arrays.asList(0, 1)));
+		fourQueens.add(new ArrayList<>(Arrays.asList(1, 0)));
+
+		tester = new GusanilloFill(4, new MockRNG(new int[][] {{5}, {0}, {0}}));
+		tester.setQueensPosition(fourQueens);
+
+		blankMatrix4 = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        blankMatrix4[i][j] = new SquareDefault();
+		    }
+		}
+		correct2 = new Square[4][4];
+		for (int i = 0; i < 4; i++) {
+		    for (int j = 0; j < 4; j++) {
+		        correct2[i][j] = new SquareDefault();
+		    }
+		}
 		
+		blankMatrix4[0][0].setAvailable(1000);		
+		blankMatrix4[0][0].setColor(Colors.BACKGROUND_RED);
+		blankMatrix4[0][1].setAvailable(1000);
+		blankMatrix4[0][1].setColor(Colors.BACKGROUND_GREEN);
+		blankMatrix4[1][0].setAvailable(1000);
+		blankMatrix4[1][0].setColor(Colors.BACKGROUND_YELLOW);
 		
+		correct2[0][0].setColor(Colors.BACKGROUND_RED);
+		correct2[0][1].setColor(Colors.BACKGROUND_GREEN);
+		correct2[1][0].setColor(Colors.BACKGROUND_YELLOW);
 		
+		blankMatrix4 = tester.callCreateSections(blankMatrix4);
+		
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				assertEquals(correct2[i][j].getColor(), blankMatrix4[i][j].getColor());
+			}
+		}
 		
 		//--------------------------------nested loop testing---------------------------------
 		//Consideramos valor habitual para el bucle interno 1, ya que es un numero aleatorio y no hay "valor habitual"
