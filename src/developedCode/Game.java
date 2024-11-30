@@ -19,6 +19,17 @@ public class Game {
 	}
 	
 	private void placeOrRemoveQueen(int x, int y){
+		Queen queen = isQueenCoords(x,y);
+		if (queen == null) {
+			board.placeQueenInSection(x, y);
+			queen = new QueenDefault(x,y);
+			queens.add(queen);
+			queen.disableSquares();
+		} else {
+			board.removeQueenInSection(x, y);
+			queen.enableSquares();
+			queens.remove(queen);
+		}
 	}
 	
 	private int[] getCoords() {
