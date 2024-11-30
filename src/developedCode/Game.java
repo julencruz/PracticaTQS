@@ -54,12 +54,12 @@ public class Game {
 	
 	public void disableSquare(int x, int y)
 	{
-
+		board.disableSquare(x, y);
 	}
 	
 	public void enableSquare(int x, int y)
 	{
-
+		board.enableSquare(x, y);
 	}
 
 	
