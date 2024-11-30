@@ -17,7 +17,13 @@ public class Game {
 	}
 	
 	private int[] getCoords() {
-		return null;
+		int size = board.getSize();
+		int[] coords;
+		do {
+			coords = view.input();
+		} 
+		while(coords[0] < 0 || coords[0] >= size || coords[1] < 0 || coords[0] >= size);
+		return coords;
 	}
 	
 	private Queen isQueenCoords() {
