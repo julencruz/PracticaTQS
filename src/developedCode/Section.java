@@ -10,7 +10,7 @@ public class Section {
 	}
 	public Section(String initColor) {
 		color = initColor;
-		disabled = true;
+		disabled = false;
 	}
 	
 	public void setColor(String setColor) {
