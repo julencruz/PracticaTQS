@@ -26,7 +26,7 @@ public class Game {
 		return coords;
 	}
 	
-	private Queen isQueenCoords() {
+	private Queen isQueenCoords(int x, int y) {
 		return null;
 	}
 	
@@ -37,6 +37,11 @@ public class Game {
 		view = vis;
 	}
 	
+	public void setQueens(ArrayList<Queen> qs)
+	{
+		queens = qs;
+	}
+	
 	public void setBoard(Board b)
 	{
 		board = b;
@@ -45,6 +50,11 @@ public class Game {
 	public int[] callGetCoords()
 	{
 		return getCoords();
+	}
+	
+	public Queen callIsQueenCoords(int x, int y)
+	{
+		return isQueenCoords(x,y);
 	}
 	
 }

@@ -2,11 +2,16 @@ package testCode;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import developedCode.Board;
 import developedCode.Game;
+import developedCode.Queen;
+import developedCode.QueenDefault;
 import developedCode.Visualizer;
 
 
@@ -77,5 +82,20 @@ class GameTest {
 	
 //	@Test
 	void testIsQueenCoords() {
+		ArrayList<Queen> queens = new ArrayList<>();
+		queens.add(new QueenDefault(2,3));
+		queens.add(new QueenDefault(0,0));
+		
+		tester = new Game();
+		
+		tester.setQueens(queens);
+		
+		assertTrue(tester.callIsQueenCoords(0,0) == queens.get(1));
+		assertTrue(tester.callIsQueenCoords(-1,0) == null);
+		assertTrue(tester.callIsQueenCoords(0,-1) == null);
+		assertTrue(tester.callIsQueenCoords(-1,-1) == null);
+		assertTrue(tester.callIsQueenCoords(2,3) == queens.get(0));
+
+		
 	}
 }
