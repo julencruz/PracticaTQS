@@ -22,7 +22,7 @@ public class Game {
 		Queen queen = isQueenCoords(x,y);
 		if (queen == null) {
 			board.placeQueenInSection(x, y);
-			queen = new QueenDefault(x,y);
+			queen = new QueenDefault(x,y,this);
 			queens.add(queen);
 			queen.disableSquares();
 		} else {
@@ -50,6 +50,16 @@ public class Game {
 			}
 		}
 		return null;
+	}
+	
+	public void disableSquare(int x, int y)
+	{
+
+	}
+	
+	public void enableSquare(int x, int y)
+	{
+
 	}
 
 	

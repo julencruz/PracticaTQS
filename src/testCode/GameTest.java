@@ -56,6 +56,17 @@ class GameTest {
 		assertTrue(tester.getQueens().size() == 1);
 	}
 	
+//	@Test
+	void testEnableOrDisableSquares() {
+		//Coordenadas correctas porque se encarga input de evitar coordenadas incorrectas.
+		tester = new Game();
+		tester.disableSquare(0, 0);
+		verify(mockBoard).disableSquare(0, 0);
+		
+		tester.enableSquare(0, 0);
+		verify(mockBoard).enableSquare(0, 0);
+	}
+	
 	@Test
 	void testGameOver() {
 		when(mockBoard.getSize()).thenReturn(4);
