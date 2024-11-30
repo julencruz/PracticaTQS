@@ -262,6 +262,31 @@ class BoardTest {
 		assertFalse(board.isSquareAvailable(4,4));
 	}
 
+	@Test
+	void testGetSquaresSection()
+	{
+		sections.add(new Section(Colors.BACKGROUND_RED));
+		sections.add(new Section(Colors.BACKGROUND_YELLOW));
+		sections.add(new Section(Colors.BACKGROUND_BLUE));
+		sections.add(new Section(Colors.BACKGROUND_MAGENTA));
+		
+		board.setSections(sections);
+		
+		Square sq1 = new SquareDefault(Colors.BACKGROUND_RED);
+		Square sq2 = new SquareDefault(Colors.BACKGROUND_YELLOW);
+		Square sq3 = new SquareDefault(Colors.BACKGROUND_BLUE);
+		Square sq4 = new SquareDefault(Colors.BACKGROUND_MAGENTA);
+		Square sq5 = new SquareDefault(Colors.BACKGROUND_BLACK);
+		
+		assertEquals(sections.get(0),board.callGetSquaresSection(sq1));
+		assertEquals(sections.get(1),board.callGetSquaresSection(sq2));
+		assertEquals(sections.get(2),board.callGetSquaresSection(sq3));
+		assertEquals(sections.get(3),board.callGetSquaresSection(sq4));
+		assertEquals(null, board.callGetSquaresSection(sq5));
+
+
+		
+	}
 
 	@Test
 	void testDisableAndEnableSquare()

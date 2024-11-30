@@ -59,14 +59,15 @@ public class Board {
 	public boolean isSquareAvailable(int x, int y) {
 		if (x >= 0 && x < size && y >= 0 && y < size) {
 			Square square = squares[x][y];
-			if(!square.isDisabled() && !getSquaresSection(square).isDisabled()){
-				
+			if(!square.isDisabled() && getSquaresSection(square) != null && !getSquaresSection(square).isDisabled()){
+				return true;
 			}
 		}
+		return false;
 	}
 	
-	private boolean getSquaresSection(Square sq) {
-		return false;
+	private Section getSquaresSection(Square sq) {
+		return null;
 	}
 	
 //	Remove when finished testing
@@ -90,6 +91,9 @@ public class Board {
 		this.sections = sections;
 	}
 	
+	public Section callGetSquaresSection(Square sq) {
+		return getSquaresSection(sq);
+	}
 	
 	public void callCreateSections(ArrayList<ArrayList<Integer>> queensPosition){
 		createSections(queensPosition);
