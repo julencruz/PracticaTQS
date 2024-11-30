@@ -11,5 +11,7 @@ public abstract class Queen {
 		posY = y;
 	}
 	
-	
+	public int[] getPos() {
+	    return new int[]{posX, posY};
+	}
 }

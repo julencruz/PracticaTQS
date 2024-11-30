@@ -27,6 +27,12 @@ public class Game {
 	}
 	
 	private Queen isQueenCoords(int x, int y) {
+		for (Queen queen : queens) {
+			int[] coord = queen.getPos();
+			if (coord[0] == x && coord[1] == y) {
+				return queen;
+			}
+		}
 		return null;
 	}
 	

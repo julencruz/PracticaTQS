@@ -80,7 +80,7 @@ class GameTest {
 		
 	}
 	
-//	@Test
+	@Test
 	void testIsQueenCoords() {
 		ArrayList<Queen> queens = new ArrayList<>();
 		queens.add(new QueenDefault(2,3));
