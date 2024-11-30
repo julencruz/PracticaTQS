@@ -37,6 +37,7 @@ class GameTest {
 	void testPlaceOrRemoveQueen() {
 		//Coordenadas correctas porque se encarga input de evitar coordenadas incorrectas.
 		tester = new Game();
+		tester.setBoard(mockBoard);
 		ArrayList<Queen> queens = new ArrayList<>();
 		
 		tester.callPlaceOrRemoveQueen(0, 0);
@@ -58,8 +59,9 @@ class GameTest {
 	
 //	@Test
 	void testEnableOrDisableSquares() {
-		//Coordenadas correctas porque se encarga input de evitar coordenadas incorrectas.
 		tester = new Game();
+		tester.setBoard(mockBoard);
+		
 		tester.disableSquare(0, 0);
 		verify(mockBoard).disableSquare(0, 0);
 		
@@ -77,23 +79,23 @@ class GameTest {
 		
 		assertFalse(tester.callGameOver());
 		
-		queens.add(new QueenDefault(0,0));
+		queens.add(new QueenDefault(0,0,tester));
 		
 		assertFalse(tester.callGameOver());
 		
-		queens.add(new QueenDefault(0,1));
+		queens.add(new QueenDefault(0,1,tester));
 		
 		assertFalse(tester.callGameOver());
 		
-		queens.add(new QueenDefault(0,2));
+		queens.add(new QueenDefault(0,2,tester));
 		
 		assertFalse(tester.callGameOver());
 		
-		queens.add(new QueenDefault(0,3));
+		queens.add(new QueenDefault(0,3,tester));
 		
 		assertTrue(tester.callGameOver());
 		
-		queens.add(new QueenDefault(1,0));
+		queens.add(new QueenDefault(1,0,tester));
 		
 		assertTrue(tester.callGameOver());
 	}
@@ -145,11 +147,12 @@ class GameTest {
 	
 	@Test
 	void testIsQueenCoords() {
-		ArrayList<Queen> queens = new ArrayList<>();
-		queens.add(new QueenDefault(2,3));
-		queens.add(new QueenDefault(0,0));
-		
 		tester = new Game();
+		ArrayList<Queen> queens = new ArrayList<>();
+		queens.add(new QueenDefault(2,3,tester));
+		queens.add(new QueenDefault(0,0,tester));
+		
+		
 		
 		tester.setQueens(queens);
 		
