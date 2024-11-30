@@ -22,7 +22,7 @@ public class Game {
 		do {
 			coords = view.input();
 		} 
-		while(coords[0] < 0 || coords[0] >= size || coords[1] < 0 || coords[0] >= size);
+		while(coords[0] < 0 || coords[0] >= size || coords[1] < 0 || coords[1] >= size);
 		return coords;
 	}
 	

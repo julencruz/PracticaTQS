@@ -24,7 +24,7 @@ class GameTest {
 		mockBoard = mock(Board.class);
 	}
 
-	@Test
+//	@Test
 	void testPlay() {
 	}
 	
@@ -75,7 +75,7 @@ class GameTest {
 		
 	}
 	
-	@Test
+//	@Test
 	void testIsQueenCoords() {
 	}
 }
