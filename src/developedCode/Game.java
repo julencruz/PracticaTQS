@@ -10,11 +10,15 @@ public class Game {
 	private Visualizer view;
 	
 	
-	
-	
 	public void play() {
 		
 	}
+	
+	private boolean gameOver() {
+		return false;
+	}
+	
+
 	
 	private int[] getCoords() {
 		int size = board.getSize();
@@ -35,7 +39,7 @@ public class Game {
 		}
 		return null;
 	}
-	
+
 	
 	//quitar dsps de test
 	public void setVis(Visualizer vis)
@@ -61,6 +65,10 @@ public class Game {
 	public Queen callIsQueenCoords(int x, int y)
 	{
 		return isQueenCoords(x,y);
+	}
+	
+	public boolean callGameOver() {
+		return gameOver();
 	}
 	
 }

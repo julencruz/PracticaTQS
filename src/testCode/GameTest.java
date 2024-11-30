@@ -33,6 +33,36 @@ class GameTest {
 	void testPlay() {
 	}
 	
+//	@Test
+	void testGameOver() {
+		when(mockBoard.getSize()).thenReturn(4);
+		tester = new Game();
+		ArrayList<Queen> queens = new ArrayList<>();
+		tester.setQueens(queens);
+		
+		assertFalse(tester.callGameOver());
+		
+		queens.add(new QueenDefault(0,0));
+		
+		assertFalse(tester.callGameOver());
+		
+		queens.add(new QueenDefault(0,1));
+		
+		assertFalse(tester.callGameOver());
+		
+		queens.add(new QueenDefault(0,2));
+		
+		assertFalse(tester.callGameOver());
+		
+		queens.add(new QueenDefault(0,3));
+		
+		assertTrue(tester.callGameOver());
+		
+		queens.add(new QueenDefault(1,0));
+		
+		assertTrue(tester.callGameOver());
+	}
+
 	@Test
 	void testGetCoords() {
 		
