@@ -19,6 +19,7 @@ import developedCode.SquareDefault;
 
 class BoardTest {
 	GenerationStrategy mockGenStat;
+	ArrayList<Section> sections = new ArrayList<>();
 	Square[][] mockMatrix;
 	Board board;
 	@BeforeEach
@@ -30,7 +31,6 @@ class BoardTest {
 				mockMatrix[i][j] = new SquareDefault();
 			}
 		}
-		
 	}
 
 	@Test
@@ -194,7 +194,6 @@ class BoardTest {
 				assertEquals(eightQueensCorrect.get(j).getColor(), board.getSections().get(j).getColor());
 				assertEquals(eightQueensCorrect.get(j).isDisabled(), board.getSections().get(j).isDisabled());
 			}
-			
 		}
 	}
 	
@@ -206,6 +205,52 @@ class BoardTest {
 //	@Test
 	void testRemoveQueenInSection() {
 		fail("Not yet implemented");
+	}
+	
+//	@Test
+	void testIsSquareAvailable() {
+		board = new Board(mockGenStat, 4);
+		
+		mockMatrix[0][0].setColor(Colors.BACKGROUND_RED);
+		mockMatrix[0][1].setColor(Colors.BACKGROUND_YELLOW);
+		mockMatrix[0][2].setColor(Colors.BACKGROUND_BLUE);
+		mockMatrix[0][3].setColor(Colors.BACKGROUND_BLUE);
+		mockMatrix[1][0].setColor(Colors.BACKGROUND_YELLOW);
+		mockMatrix[1][1].setColor(Colors.BACKGROUND_YELLOW);
+		mockMatrix[1][2].setColor(Colors.BACKGROUND_YELLOW);
+		mockMatrix[1][3].setColor(Colors.BACKGROUND_MAGENTA);
+		mockMatrix[2][0].setColor(Colors.BACKGROUND_RED);
+		mockMatrix[2][1].setColor(Colors.BACKGROUND_MAGENTA);
+		mockMatrix[2][2].setColor(Colors.BACKGROUND_BLUE);
+		mockMatrix[2][3].setColor(Colors.BACKGROUND_MAGENTA);
+		mockMatrix[3][0].setColor(Colors.BACKGROUND_RED);
+		mockMatrix[3][1].setColor(Colors.BACKGROUND_RED);
+		mockMatrix[3][2].setColor(Colors.BACKGROUND_BLUE);
+		mockMatrix[3][3].setColor(Colors.BACKGROUND_MAGENTA);
+		
+		mockMatrix[3][3].disable();
+		mockMatrix[0][3].disable();
+		mockMatrix[1][3].disable();
+		mockMatrix[2][3].disable();
+		mockMatrix[2][2].disable();
+		mockMatrix[3][0].disable();
+		mockMatrix[3][1].disable();
+		mockMatrix[3][2].disable();
+
+		sections.add(new Section(Colors.BACKGROUND_RED));
+		sections.add(new Section(Colors.BACKGROUND_YELLOW));
+		sections.add(new Section(Colors.BACKGROUND_BLUE));
+		sections.add(new Section(Colors.BACKGROUND_MAGENTA));
+
+		sections.get(3).disable();
+		
+		board.setMatrix(mockMatrix);
+		board.setSections(sections);
+		
+		assertFalse(board.isSquareAvailable(2,3));
+		assertFalse(board.isSquareAvailable(3,2));
+		assertFalse(board.isSquareAvailable(2,1));
+		assertTrue(board.isSquareAvailable(0,0));
 	}
 
 

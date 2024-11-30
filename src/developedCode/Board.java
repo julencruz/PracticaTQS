@@ -32,7 +32,8 @@ public class Board {
 	}
 	
 	public void disableSquare(int x, int y) {
-		if (x < size && x >= 0 && y < size && y >=0) {
+		if (x < size && x >= 0 && y < size && y >=0) 
+		{
 			squares[x][y].disable();
 		}
 		
@@ -74,6 +75,10 @@ public class Board {
 	
 	public ArrayList<Section> getSections() {
 		return sections;
+	}
+	
+	public void setSections(ArrayList<Section> sections) {
+		this.sections = sections;
 	}
 	
 	
