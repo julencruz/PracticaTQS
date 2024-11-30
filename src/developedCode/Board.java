@@ -24,11 +24,11 @@ public class Board {
 	}
 	
 	public void removeQueenInSection(int x, int y) {
-		
+
 	}
 	
 	public void placeQueenInSection(int x, int y) {
-		
+		getSquaresSection(squares[x][y]).disable();
 	}
 	
 	public void disableSquare(int x, int y) {

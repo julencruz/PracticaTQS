@@ -227,6 +227,8 @@ class BoardTest {
 		//comprobar que la casilla es valida solo hay que mirar que 
 		//deshabilite la seccion correctamente
 		
+		//test place queens
+		 
 		board.placeQueenInSection(0, 0);
 		
 		assertTrue(board.getSections().get(0).isDisabled());
@@ -236,25 +238,57 @@ class BoardTest {
 
 		board.placeQueenInSection(0, 1);
 		
-		assertTrue(board.getSections().get(1).isDisabled());
 		assertTrue(board.getSections().get(0).isDisabled());
+		assertTrue(board.getSections().get(1).isDisabled());
 		assertFalse(board.getSections().get(2).isDisabled());
 		assertFalse(board.getSections().get(3).isDisabled());
 		
 		board.placeQueenInSection(1, 0);
 		
-		assertTrue(board.getSections().get(2).isDisabled());
 		assertTrue(board.getSections().get(0).isDisabled());
 		assertTrue(board.getSections().get(1).isDisabled());
+		assertTrue(board.getSections().get(2).isDisabled());
 		assertFalse(board.getSections().get(3).isDisabled());
 		
 		
 		board.placeQueenInSection(1, 1);
 		
-		assertTrue(board.getSections().get(3).isDisabled());
 		assertTrue(board.getSections().get(0).isDisabled());
 		assertTrue(board.getSections().get(1).isDisabled());
 		assertTrue(board.getSections().get(2).isDisabled());
+		assertTrue(board.getSections().get(3).isDisabled());
+		
+		
+		//test remove queen
+		
+		board.removeQueenInSection(1, 1);
+		
+		assertTrue(board.getSections().get(0).isDisabled());
+		assertTrue(board.getSections().get(1).isDisabled());
+		assertTrue(board.getSections().get(2).isDisabled());
+		assertFalse(board.getSections().get(3).isDisabled());
+		
+		board.removeQueenInSection(1, 0);
+		
+		assertTrue(board.getSections().get(0).isDisabled());
+		assertTrue(board.getSections().get(1).isDisabled());
+		assertFalse(board.getSections().get(2).isDisabled());
+		assertFalse(board.getSections().get(3).isDisabled());
+		
+		board.removeQueenInSection(0, 1);
+		
+		assertTrue(board.getSections().get(0).isDisabled());
+		assertFalse(board.getSections().get(1).isDisabled());
+		assertFalse(board.getSections().get(2).isDisabled());
+		assertFalse(board.getSections().get(3).isDisabled());
+		
+		board.removeQueenInSection(0, 0);
+		
+		assertFalse(board.getSections().get(0).isDisabled());
+		assertFalse(board.getSections().get(1).isDisabled());
+		assertFalse(board.getSections().get(2).isDisabled());
+		assertFalse(board.getSections().get(3).isDisabled());
+		
 		
 	}
 	
