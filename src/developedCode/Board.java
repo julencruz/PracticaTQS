@@ -67,6 +67,11 @@ public class Board {
 	}
 	
 	private Section getSquaresSection(Square sq) {
+		for (Section section : sections) {
+			if (section.isSquareInSection(sq)) {
+				return section;
+			}
+		}
 		return null;
 	}
 	
