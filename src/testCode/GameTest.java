@@ -33,6 +33,29 @@ class GameTest {
 	void testPlay() {
 	}
 	
+//	@Test
+	void testPlaceOrRemoveQueen() {
+		//Coordenadas correctas porque se encarga input de evitar coordenadas incorrectas.
+		tester = new Game();
+		ArrayList<Queen> queens = new ArrayList<>();
+		
+		tester.callPlaceOrRemoveQueen(0, 0);
+		verify(mockBoard).placeQueenInSection(0, 0);
+		verify(mockBoard).disableSquare(anyInt(), anyInt());
+		assertTrue(tester.getQueens().size() == 1);
+		
+		
+		tester.callPlaceOrRemoveQueen(1, 1);
+		verify(mockBoard).placeQueenInSection(1, 1);
+		verify(mockBoard).disableSquare(anyInt(), anyInt());
+		assertTrue(tester.getQueens().size() == 2);
+		
+		tester.callPlaceOrRemoveQueen(0, 0);
+		verify(mockBoard).removeQueenInSection(0, 0);
+		verify(mockBoard).enableSquare(anyInt(), anyInt());
+		assertTrue(tester.getQueens().size() == 1);
+	}
+	
 	@Test
 	void testGameOver() {
 		when(mockBoard.getSize()).thenReturn(4);

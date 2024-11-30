@@ -18,7 +18,8 @@ public class Game {
 		return (queens.size() >= board.getSize());
 	}
 	
-
+	private void placeOrRemoveQueen(int x, int y){
+	}
 	
 	private int[] getCoords() {
 		int size = board.getSize();
@@ -52,6 +53,11 @@ public class Game {
 		queens = qs;
 	}
 	
+		public ArrayList<Queen> getQueens()
+	{
+		return queens;
+	}
+	
 	public void setBoard(Board b)
 	{
 		board = b;
@@ -69,6 +75,10 @@ public class Game {
 	
 	public boolean callGameOver() {
 		return gameOver();
+	}
+	
+	public void callPlaceOrRemoveQueen(int x, int y){
+		 placeOrRemoveQueen(x, y);
 	}
 	
 }
