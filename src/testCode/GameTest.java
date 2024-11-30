@@ -33,10 +33,11 @@ class GameTest {
 	void testPlay() {
 	}
 	
-//	@Test
+	@Test
 	void testGameOver() {
 		when(mockBoard.getSize()).thenReturn(4);
 		tester = new Game();
+		tester.setBoard(mockBoard);
 		ArrayList<Queen> queens = new ArrayList<>();
 		tester.setQueens(queens);
 		
@@ -65,8 +66,6 @@ class GameTest {
 
 	@Test
 	void testGetCoords() {
-		
-		
 		int[][] inputs = { {-1,-1}, {0,0}, {1,1}, {6,6}, {7,7}, {8,8},{-100,-100}, {-100, 5}, {-100, 100}, {5,-100}, {5, 5}, {5, 100}, {100, -100}, {100, 5}, {100, 100}, {3,6}};
 		when(mockVis.input()).thenReturn(inputs[0]).thenReturn(inputs[1]).thenReturn(inputs[2]).thenReturn(inputs[3])
 		.thenReturn(inputs[4]).thenReturn(inputs[5]).thenReturn(inputs[6]).thenReturn(inputs[7])

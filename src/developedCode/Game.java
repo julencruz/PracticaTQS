@@ -15,7 +15,7 @@ public class Game {
 	}
 	
 	private boolean gameOver() {
-		return false;
+		return (queens.size() >= board.getSize());
 	}
 	
 
