@@ -24,7 +24,7 @@ public class Board {
 	}
 	
 	public void removeQueenInSection(int x, int y) {
-
+		getSquaresSection(squares[x][y]).enable();
 	}
 	
 	public void placeQueenInSection(int x, int y) {
@@ -36,7 +36,6 @@ public class Board {
 		{
 			squares[x][y].disable();
 		}
-		
 	}
 	
 	

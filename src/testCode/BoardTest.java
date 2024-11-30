@@ -197,8 +197,10 @@ class BoardTest {
 		}
 	}
 	
-//	@Test
+	@Test
 	void testPlaceAndRemoveQueenInSection() {
+		sections = new ArrayList<>();
+		Board board = new Board(mockGenStat, 2);
 		Square[][] twoMatrix = new Square[2][2];
 		
 		for(int i = 0; i< 2; i++)
@@ -210,10 +212,10 @@ class BoardTest {
 
 		}
 		
-		mockMatrix[0][0].setColor(Colors.BACKGROUND_RED);
-		mockMatrix[0][1].setColor(Colors.BACKGROUND_YELLOW);
-		mockMatrix[1][0].setColor(Colors.BACKGROUND_BLUE);
-		mockMatrix[1][1].setColor(Colors.BACKGROUND_GREEN);
+		twoMatrix[0][0].setColor(Colors.BACKGROUND_RED);
+		twoMatrix[0][1].setColor(Colors.BACKGROUND_YELLOW);
+		twoMatrix[1][0].setColor(Colors.BACKGROUND_BLUE);
+		twoMatrix[1][1].setColor(Colors.BACKGROUND_GREEN);
 		
 		sections.add(new Section(Colors.BACKGROUND_RED));
 		sections.add(new Section(Colors.BACKGROUND_YELLOW));
