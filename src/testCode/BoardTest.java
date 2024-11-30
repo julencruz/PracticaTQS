@@ -207,7 +207,7 @@ class BoardTest {
 		fail("Not yet implemented");
 	}
 	
-//	@Test
+	@Test
 	void testIsSquareAvailable() {
 		board = new Board(mockGenStat, 4);
 		
@@ -265,6 +265,7 @@ class BoardTest {
 	@Test
 	void testGetSquaresSection()
 	{
+		board = new Board(mockGenStat, 4);
 		sections.add(new Section(Colors.BACKGROUND_RED));
 		sections.add(new Section(Colors.BACKGROUND_YELLOW));
 		sections.add(new Section(Colors.BACKGROUND_BLUE));
