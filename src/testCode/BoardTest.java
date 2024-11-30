@@ -199,7 +199,63 @@ class BoardTest {
 	
 //	@Test
 	void testPlaceAndRemoveQueenInSection() {
-		fail("Not yet implemented");
+		Square[][] twoMatrix = new Square[2][2];
+		
+		for(int i = 0; i< 2; i++)
+		{
+			for(int j = 0; j< 2; j++)
+			{
+				twoMatrix[i][j] = new SquareDefault();
+			}
+
+		}
+		
+		mockMatrix[0][0].setColor(Colors.BACKGROUND_RED);
+		mockMatrix[0][1].setColor(Colors.BACKGROUND_YELLOW);
+		mockMatrix[1][0].setColor(Colors.BACKGROUND_BLUE);
+		mockMatrix[1][1].setColor(Colors.BACKGROUND_GREEN);
+		
+		sections.add(new Section(Colors.BACKGROUND_RED));
+		sections.add(new Section(Colors.BACKGROUND_YELLOW));
+		sections.add(new Section(Colors.BACKGROUND_BLUE));
+		sections.add(new Section(Colors.BACKGROUND_GREEN));
+		
+		board.setMatrix(twoMatrix);
+		board.setSections(sections);
+		
+		//debido a que esta funcion solo se ejecutara despues de 
+		//comprobar que la casilla es valida solo hay que mirar que 
+		//deshabilite la seccion correctamente
+		
+		board.placeQueenInSection(0, 0);
+		
+		assertTrue(board.getSections().get(0).isDisabled());
+		assertFalse(board.getSections().get(1).isDisabled());
+		assertFalse(board.getSections().get(2).isDisabled());
+		assertFalse(board.getSections().get(3).isDisabled());
+
+		board.placeQueenInSection(0, 1);
+		
+		assertTrue(board.getSections().get(1).isDisabled());
+		assertTrue(board.getSections().get(0).isDisabled());
+		assertFalse(board.getSections().get(2).isDisabled());
+		assertFalse(board.getSections().get(3).isDisabled());
+		
+		board.placeQueenInSection(1, 0);
+		
+		assertTrue(board.getSections().get(2).isDisabled());
+		assertTrue(board.getSections().get(0).isDisabled());
+		assertTrue(board.getSections().get(1).isDisabled());
+		assertFalse(board.getSections().get(3).isDisabled());
+		
+		
+		board.placeQueenInSection(1, 1);
+		
+		assertTrue(board.getSections().get(3).isDisabled());
+		assertTrue(board.getSections().get(0).isDisabled());
+		assertTrue(board.getSections().get(1).isDisabled());
+		assertTrue(board.getSections().get(2).isDisabled());
+		
 	}
 	
 	@Test
