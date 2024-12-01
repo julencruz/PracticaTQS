@@ -7,13 +7,12 @@ public class QueenDefault extends Queen{
 	}
 
 	@Override
-	public void disableSquares() {
-		// TODO Auto-generated method stub
-		
+	public void disableSquares(int size) {
+
 	}
 
 	@Override
-	public void enableSquares() {
+	public void enableSquares(int size) {
 		// TODO Auto-generated method stub
 		
 	}

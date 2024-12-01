@@ -16,6 +16,6 @@ public abstract class Queen {
 	    return new int[]{posX, posY};
 	}
 	
-	public abstract void disableSquares();
-	public abstract void enableSquares();
+	public abstract void disableSquares(int size);
+	public abstract void enableSquares(int size);
 }
