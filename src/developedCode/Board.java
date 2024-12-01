@@ -87,11 +87,13 @@ public class Board {
 		return null;
 	}
 	
-//	Remove when finished testing
+
 	public Square[][] getMatrix() {
 		return squares;
 	}
 	
+	
+//	Remove when finished testing
 	public void setMatrix(Square[][] matrix) {
 		for (int i = 0; i < matrix[0].length; i++) {
 			for (int j = 0; j < matrix[0].length; j++) {
