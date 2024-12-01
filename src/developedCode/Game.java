@@ -21,13 +21,15 @@ public class Game {
 	private void placeOrRemoveQueen(int x, int y){
 		Queen queen = isQueenCoords(x,y);
 		if (queen == null) {
-			board.placeQueenInSection(x, y);
-			queen = new QueenDefault(x,y,this);
-			queens.add(queen);
-			queen.disableSquares();
+			if (board.isSquareAvailable(x, y)) {
+				board.placeQueenInSection(x, y);
+				queen = new QueenDefault(x,y,this);
+				queens.add(queen);
+				queen.disableSquares(board.getSize());
+			}
 		} else {
 			board.removeQueenInSection(x, y);
-			queen.enableSquares();
+			queen.enableSquares(board.getSize());
 			queens.remove(queen);
 		}
 	}
