@@ -28,10 +28,10 @@ class QueenTest {
 		// En primera fila son las coordenadas de las casilla que se deberian deshabilitar si ponemos una reina en 0,0. 
 		// La segunda fila es para una reina puesta en 2,2
 		// segunda copia de los valores es para test de enable
-		int[][] valuesToTest = {{0,0},{0,1},{0,2},{0,3},{0,0},{1,0},{2,0},{3,0},{1,1},
-								{2,0},{2,1},{2,2},{2,3},{0,2},{1,2},{2,2},{3,2},{1,3},{3,3},{3,1},{1,1},
-								{0,0},{0,1},{0,2},{0,3},{0,0},{1,0},{2,0},{3,0},{1,1},
-								{2,0},{2,1},{2,2},{2,3},{0,2},{1,2},{2,2},{3,2},{1,3},{3,3},{3,1},{1,1}};
+		int[][] valuesToTest = {{0,0},{0,0},{0,1},{1,0},{0,2},{2,0},{0,3},{3,0},{1,1},
+								{2,0},{0,2},{2,1},{1,2},{2,2},{2,2},{2,3},{3,2},{1,3},{3,3},{3,1},{1,1},
+								{0,0},{0,0},{0,1},{1,0},{0,2},{2,0},{0,3},{3,0},{1,1},
+								{2,0},{0,2},{2,1},{1,2},{2,2},{2,2},{2,3},{3,2},{1,3},{3,3},{3,1},{1,1}};
 		mockGame = new MockGame(valuesToTest);
 		queen1 = new QueenDefault(0,0,mockGame);
 
