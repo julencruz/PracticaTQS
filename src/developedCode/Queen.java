@@ -1,9 +1,9 @@
 package developedCode;
 
 public abstract class Queen {
-	private int posX;
-	private int posY;
-	private Game game;
+	protected int posX;
+	protected int posY;
+	protected Game game;
 	
 	public Queen(int x, int y, Game g)
 	{
