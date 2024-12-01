@@ -23,15 +23,19 @@ public class Game {
 	
 	
 	public void play() {
+		queens.clear();
 		board.generateBoard();
 		view.init();
+		boolean help = view.askForHelp();
 		while(!gameOver()) {
+			view.showBoard(board, queens, help);
 			int[] coords = getCoords();
 			placeOrRemoveQueen(coords[0], coords[1]);
 		}
 		view.win();
 		boolean again = view.playAgain();
 		if (again) {
+			view.clear();
 			play();
 		} else {
 			view.finish();
