@@ -22,16 +22,52 @@ class GameTest {
 	Visualizer mockVis;
 	Board mockBoard;
 	Game tester;
-	Queen mockQueen;
 	
+
 	@BeforeEach
 	void setUp() throws Exception {
 		mockVis = mock(Visualizer.class);
 		mockBoard = mock(Board.class);
 	}
 
-//	@Test
+	@Test
 	void testPlay() {
+		tester = new Game(mockBoard, mockVis);
+		int[][] inputs = {{0,0},{1,1},{-1,5},{1,2},{1,2},{0,0},{2,0},{1,3},{0,1},{3,2}};
+		when(mockVis.input()).thenReturn(inputs[0]).thenReturn(inputs[1]).thenReturn(inputs[2]).thenReturn(inputs[3]).thenReturn(inputs[4]).thenReturn(inputs[5]).thenReturn(inputs[6]).thenReturn(inputs[7]).thenReturn(inputs[8]).thenReturn(inputs[9]);
+		when(mockVis.playAgain()).thenReturn(false);
+		Boolean[] isAvailableOut = {true, false, true, true, true, true, true};
+		when(mockBoard.isSquareAvailable(anyInt(), anyInt())).thenReturn(isAvailableOut[0]).thenReturn(isAvailableOut[1]).thenReturn(isAvailableOut[2]).thenReturn(isAvailableOut[3]).thenReturn(isAvailableOut[4]).thenReturn(isAvailableOut[5]).thenReturn(isAvailableOut[6]);
+
+		tester.play();
+		
+		verify(mockBoard).placeQueenInSection(0,0);
+		verify(mockBoard).disableSquare(anyInt(),anyInt());
+	
+		
+		verify(mockBoard).placeQueenInSection(1,2);
+		verify(mockBoard).disableSquare(anyInt(),anyInt());
+		
+		verify(mockBoard).removeQueenInSection(1,2);
+		verify(mockBoard).enableSquare(anyInt(),anyInt());
+		
+		verify(mockBoard).removeQueenInSection(0,2);
+		verify(mockBoard).enableSquare(anyInt(),anyInt());
+		
+		verify(mockBoard).placeQueenInSection(2,0);
+		verify(mockBoard).disableSquare(anyInt(),anyInt());
+		
+		verify(mockBoard).placeQueenInSection(1,3);
+		verify(mockBoard).disableSquare(anyInt(),anyInt());
+		
+		verify(mockBoard).placeQueenInSection(0,1);
+		verify(mockBoard).disableSquare(anyInt(),anyInt());
+		
+		verify(mockBoard).placeQueenInSection(3,2);
+		verify(mockBoard).disableSquare(anyInt(),anyInt());
+		
+		verify(mockVis).win();
+		verify(mockVis).playAgain();
 	}
 	
 	@Test
@@ -78,6 +114,7 @@ class GameTest {
 		verify(mockBoard).removeQueenInSection(3, 3);
 		verify(mockBoard, times(30)).enableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 0);
+		
 	}
 	
 //	@Test

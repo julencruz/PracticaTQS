@@ -9,6 +9,18 @@ public class Game {
 	private ArrayList<Queen> queens = new ArrayList<>();
 	private Visualizer view;
 	
+	public Game()
+	{
+		board = new Board();
+		view = new Visualizer();
+	}
+	
+	public Game(Board b, Visualizer v)
+	{
+		board = b;
+		view = v;
+	}
+	
 	
 	public void play() {
 		

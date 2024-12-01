@@ -7,6 +7,18 @@ public class Board {
 	private GenerationStrategy strategy;
 	private int size;
 	
+	public Board()
+	{
+		strategy = new GusanilloFill();
+		size = strategy.getSize();
+		squares = new Square[size][size];
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				squares[i][j] = new SquareDefault();
+			}
+		}
+	}
+	
 	public Board (GenerationStrategy strategy, int size) {
 		this.strategy = strategy;
 		this.size = size;
@@ -20,7 +32,7 @@ public class Board {
 	
 	public void generateBoard() {
 		squares = strategy.generate();
-		createSections(strategy.getQueensPosition());
+		createSectionsList(strategy.getQueensPosition());
 	}
 	
 	public void removeQueenInSection(int x, int y) {
@@ -39,7 +51,7 @@ public class Board {
 	}
 	
 	
-	private void createSections(ArrayList<ArrayList<Integer>> queensPosition) {
+	private void createSectionsList(ArrayList<ArrayList<Integer>> queensPosition) {
 		sections.clear();
 		String color = null;
 		for (ArrayList<Integer> coords : queensPosition) {
@@ -101,7 +113,7 @@ public class Board {
 	}
 	
 	public void callCreateSections(ArrayList<ArrayList<Integer>> queensPosition){
-		createSections(queensPosition);
+		createSectionsList(queensPosition);
 	}
 
 	public int getSize() {

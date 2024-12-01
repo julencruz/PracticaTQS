@@ -5,6 +5,11 @@ import java.util.Arrays;
 
 public class GusanilloFill extends GenerationStrategy {
 
+	public GusanilloFill()
+	{
+		super();
+	}
+
 	public GusanilloFill(int size, RNG rng) {
 		super(size, rng);
 	}

@@ -9,6 +9,12 @@ public abstract class GenerationStrategy {
 	protected RNG rng;
 	protected ArrayList<ArrayList<Integer>> queensPosition = new ArrayList<>();
 	
+	public GenerationStrategy()
+	{
+		rng = new RNG();
+		size = rng.random(4,8);
+	}
+	
 	public GenerationStrategy(int size, RNG rng) {
 		assert (size <= Colors.colorArray.size()) : "Not enough colors for that many queens!";
 		this.size = size;
@@ -215,6 +221,11 @@ public abstract class GenerationStrategy {
 	
 	public ArrayList<ArrayList<Integer>> getQueensPosition() {
 		return queensPosition;
+	}
+	
+	public int getSize()
+	{
+		return size;
 	}
 	
 //	Remove when finished testing
