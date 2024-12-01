@@ -22,6 +22,7 @@ class GameTest {
 	Visualizer mockVis;
 	Board mockBoard;
 	Game tester;
+	Queen mockQueen;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -37,6 +38,7 @@ class GameTest {
 	void testPlaceOrRemoveQueen() {
 		//Coordenadas correctas porque se encarga input de evitar coordenadas incorrectas.
 		tester = new Game();
+		when(mockBoard.isSquareAvailable(1, 1)).thenReturn(false);
 		tester.setBoard(mockBoard);
 		ArrayList<Queen> queens = new ArrayList<>();
 		
@@ -45,9 +47,13 @@ class GameTest {
 		verify(mockBoard).disableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 1);
 		
-		
 		tester.callPlaceOrRemoveQueen(1, 1);
 		verify(mockBoard).placeQueenInSection(1, 1);
+		verify(mockBoard).disableSquare(anyInt(), anyInt());
+		assertTrue(tester.getQueens().size() == 1);
+		
+		tester.callPlaceOrRemoveQueen(3,3);
+		verify(mockBoard).placeQueenInSection(3, 3);
 		verify(mockBoard).disableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 2);
 		
@@ -55,6 +61,21 @@ class GameTest {
 		verify(mockBoard).removeQueenInSection(0, 0);
 		verify(mockBoard).enableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 1);
+		
+		tester.callPlaceOrRemoveQueen(1, 1);
+		verify(mockBoard).removeQueenInSection(1, 1);
+		verify(mockBoard).enableSquare(anyInt(), anyInt());
+		assertTrue(tester.getQueens().size() == 2);
+		
+		tester.callPlaceOrRemoveQueen(1, 1);
+		verify(mockBoard).removeQueenInSection(1, 1);
+		verify(mockBoard).enableSquare(anyInt(), anyInt());
+		assertTrue(tester.getQueens().size() == 1);
+		
+		tester.callPlaceOrRemoveQueen(3, 3);
+		verify(mockBoard).removeQueenInSection(3, 3);
+		verify(mockBoard).enableSquare(anyInt(), anyInt());
+		assertTrue(tester.getQueens().size() == 0);
 	}
 	
 //	@Test
