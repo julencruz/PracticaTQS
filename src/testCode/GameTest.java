@@ -34,47 +34,49 @@ class GameTest {
 	void testPlay() {
 	}
 	
-//	@Test
+	@Test
 	void testPlaceOrRemoveQueen() {
 		//Coordenadas correctas porque se encarga input de evitar coordenadas incorrectas.
 		tester = new Game();
-		when(mockBoard.isSquareAvailable(1, 1)).thenReturn(false);
+		when(mockBoard.isSquareAvailable(1, 1)).thenReturn(false).thenReturn(true);
+		when(mockBoard.isSquareAvailable(0, 0)).thenReturn(true);
+		when(mockBoard.isSquareAvailable(3, 3)).thenReturn(true);
+		when(mockBoard.getSize()).thenReturn(4);
+		
 		tester.setBoard(mockBoard);
 		ArrayList<Queen> queens = new ArrayList<>();
 		
 		tester.callPlaceOrRemoveQueen(0, 0);
 		verify(mockBoard).placeQueenInSection(0, 0);
-		verify(mockBoard).disableSquare(anyInt(), anyInt());
+		verify(mockBoard, times(9)).disableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 1);
 		
 		tester.callPlaceOrRemoveQueen(1, 1);
-		verify(mockBoard).placeQueenInSection(1, 1);
-		verify(mockBoard).disableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 1);
 		
 		tester.callPlaceOrRemoveQueen(3,3);
 		verify(mockBoard).placeQueenInSection(3, 3);
-		verify(mockBoard).disableSquare(anyInt(), anyInt());
+		verify(mockBoard, times(18)).disableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 2);
 		
 		tester.callPlaceOrRemoveQueen(0, 0);
 		verify(mockBoard).removeQueenInSection(0, 0);
-		verify(mockBoard).enableSquare(anyInt(), anyInt());
+		verify(mockBoard, times(9)).enableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 1);
 		
 		tester.callPlaceOrRemoveQueen(1, 1);
-		verify(mockBoard).removeQueenInSection(1, 1);
-		verify(mockBoard).enableSquare(anyInt(), anyInt());
+		verify(mockBoard).placeQueenInSection(1, 1);
+		verify(mockBoard, times(30)).disableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 2);
 		
 		tester.callPlaceOrRemoveQueen(1, 1);
 		verify(mockBoard).removeQueenInSection(1, 1);
-		verify(mockBoard).enableSquare(anyInt(), anyInt());
+		verify(mockBoard, times(21)).enableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 1);
 		
 		tester.callPlaceOrRemoveQueen(3, 3);
 		verify(mockBoard).removeQueenInSection(3, 3);
-		verify(mockBoard).enableSquare(anyInt(), anyInt());
+		verify(mockBoard, times(30)).enableSquare(anyInt(), anyInt());
 		assertTrue(tester.getQueens().size() == 0);
 	}
 	
