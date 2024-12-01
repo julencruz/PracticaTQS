@@ -1,6 +1,9 @@
 package developedCode;
 
 public class Visualizer {
+	
+	public void init() {
+	}
 
 	public int[] input() {
 		return null;
@@ -11,6 +14,9 @@ public class Visualizer {
 	}
 	
 	public void win() {
+	}
+	
+	public void finish() {
 	}
 
 }
